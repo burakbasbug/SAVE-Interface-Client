@@ -1,0 +1,57 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:promise/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier",
+    "promise"
+  ],
+  "env": {
+    "es6": true,
+    "jasmine": true,
+    "node": true
+  },
+  "rules": {
+    "arrow-parens": "off",
+    "function-paren-newline": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "./test/**/*.js",
+          "./gulp/tasks/*.js",
+          "./gulpfile.js"
+        ]
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ]
+      }
+    ],
+    "no-use-before-define": [
+      2,
+      {
+        "functions": false,
+        "classes": true
+      }
+    ],
+    "no-confusing-arrow": "off",
+    "prettier/prettier": "warn",
+    "promise/always-return": "off",
+    "promise/valid-params": "off",
+    "promise/no-nesting": "off",
+    "space-before-function-paren": "off",
+    "no-unused-vars": "warn"
+  }
+}

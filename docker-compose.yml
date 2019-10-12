@@ -1,0 +1,66 @@
+version: "3.7"
+
+services:
+  save-client:
+    build: .
+    image: save-client
+    networks:
+      - save_network
+    ports:              # like publish (docker cli) mapping for localhost-container
+      - "3000:3000"
+    expose:             # ports visible only between containers on network
+      - "1883"
+      - "9200"
+    depends_on:
+      - mosquitto
+#    env_file: .env
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.1
+    expose:
+      - "9200"
+    networks:
+      - save_network
+    environment:
+      - "ES_JAVA_OPTS=-Xmx256m -Xms256m"
+      - node.ingest=false
+      - xpack.security.enabled=false
+      - xpack.sql.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.watcher.enabled=false
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.8.1
+    networks:
+      - save_network
+    ports:
+      - "5601:5601"
+    environment:
+      - xpack.ml.enabled=false
+      - xpack.reporting.enabled=false
+      - xpack.searchprofiler.enabled=false
+      - xpack.grokdebugger.enabled
+
+  mosquitto:
+    image: eclipse-mosquitto
+    networks:
+      - save_network
+    ports:
+      - "1883:1883"
+
+networks:
+  save_network:
+
+
+
+# build after changes!
+# important: start with "up", stop with "down". Because:
+# docker-compose down: Stops containers and removes containers, networks, volumes, and images created by up.
+  # https://docs.docker.com/compose/reference/down/
+
+# logs: logs [options] [SERVICE...]
+  # https://docs.docker.com/compose/reference/logs/
+  # containers should be started as daemon: docker-compose up -d
+  # dump all logs of a container: docker-compose logs acona-app
+  # dump last 100 lines: docker-compose logs --tail=100 acona-app
+  # select a container and follow logs: docker-compose logs -f acona-app
