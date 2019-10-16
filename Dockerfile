@@ -10,7 +10,7 @@ EXPOSE 1883
 # ENV anyEnvVar $anyEnvVar
 # RUN echo Elasticsearch indices will be recreated: $anyEnvVar
 
-RUN npm install
+RUN npm install --production
 RUN ls -al
 CMD echo "Waiting for elasticsearch to be ready..." && \
   ./bin/wait-for.sh "elasticsearch:9200" -t 300 -- node saveClientInterface.js

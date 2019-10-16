@@ -19,7 +19,7 @@ module.exports = {
       'Bend.properties': featureObj,
       'GAuntenlngs.properties': featureObj,
       'GAobenlngs.properties': featureObj,
-      'KAobenlngs.properties': featureObj,
+      KAobenlngs: es.disabled, // TEST AMACLI
     },
     usecase_id: es.keywordNoIndex,
     timestamp: es.keywordNoIndex,

@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const log = require('yalm');
 const bluebird = require('bluebird');
 const { elasticsearch } = require('../../localConfig');
-const topicIndexNameMapping = require('../topicIndexNameMapping');
+const topicIndexNameMapping = require('../topicIndexMapping');
 
 /**
  * https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-index_.html#_automatic_id_generation
@@ -11,7 +11,8 @@ const topicIndexNameMapping = require('../topicIndexNameMapping');
 async function indexDocument(index, doc) {
   const uri = `${elasticsearch.url}/${sanitizeIndexName(index)}/_doc/`;
   const body = doc;
-  log.info('POST ', uri, body);
+  log.info('POST ', uri);
+  log.debug(`POST body: ${body}`);
 
   const opts = {
     method: 'POST',
@@ -24,8 +25,13 @@ async function indexDocument(index, doc) {
     simple: false,
   };
   await rp(opts).then(res => {
-    if (res.statusCode !== 200 && res.statusCode !== 201) {
-      log.error(res.statusCode, res.body, 'DOCUMENT: ', doc);
+    log.debug(`POST response ${res.statusCode}`);
+    if (!(res.statusCode === 200 || res.statusCode === 201)) {
+      log.error(
+        `Request status code: ${res.statusCode}, response: ${res.body}`,
+        'DOCUMENT: ',
+        doc
+      );
     }
   });
 }
@@ -96,7 +102,10 @@ async function createIndices() {
     }
   );
   const reqs = _.map(indicesToCreate, rp);
-  await bluebird.all(reqs).tap(console.log);
+  await bluebird
+    .all(reqs)
+    .tap(() => log.info('Indices created successfully!'))
+    .tapCatch(() => log.err('Index creation failed!'));
 }
 
 /*

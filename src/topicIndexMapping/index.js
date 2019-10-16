@@ -1,4 +1,4 @@
-const { FEATURE_MAP, REPLY_TO } = require('./esTypes');
+const { PRODUCT, REPLY_TO } = require('./esTypes');
 
 const machine1 = [
   {
@@ -30,23 +30,19 @@ const machine2 = [
   },
 ];
 
-const positions = [
+const product = [
   {
     topic: '<ConrodSimulator>/conveyorbelt/position1',
-    mappings: FEATURE_MAP,
+    mappings: PRODUCT,
   },
   {
     topic: '<ConrodSimulator>/conveyorbelt/position2',
-    mappings: FEATURE_MAP,
+    mappings: PRODUCT,
   },
   {
     topic: '<ConrodSimulator>/conveyorbelt/position3',
-    mappings: FEATURE_MAP,
+    mappings: PRODUCT,
   },
 ];
 
-module.exports = [
-  // ...machine1,
-  // ...machine2,
-  ...positions,
-];
+module.exports = [...machine1, ...machine2, ...product];
