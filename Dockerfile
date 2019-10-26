@@ -7,7 +7,7 @@ EXPOSE 3000
 EXPOSE 1883
 
 # ARG anyEnvVar
-# ENV anyEnvVar $anyEnvVar
+ENV NODE_ENV=production
 # RUN echo Elasticsearch indices will be recreated: $anyEnvVar
 
 RUN npm install --production

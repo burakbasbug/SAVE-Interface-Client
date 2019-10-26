@@ -7,20 +7,23 @@ const simulatorService = require('./simulatorService');
 
 const TRIGGER_TOPIC = config.mqtt.simulator.triggerTopic;
 
-const getStatus = (req, reply) =>
-  reply({
-    simulationCycleRunning: simulatorService.getSimulationRunning(),
-    mqttConnected: mqttService.clientConnected(),
-  }).code(httpStatus.OK);
+/**
+ * Returns 200 OK and the JSON object.
+ * @return {{simulationCycleRunning: *, mqttConnected: *}}
+ */
+const getStatus = () => ({
+  simulationCycleRunning: simulatorService.getSimulationRunning(),
+  mqttConnected: mqttService.clientConnected(),
+});
 
-const triggerSimulation = (req, reply) => {
-  log.info(req.method, req.path);
+const triggerSimulation = (request, h) => {
+  log.info(request.method, request.path);
   try {
     mqttService.getConnection().publish(TRIGGER_TOPIC, 'Run!');
     simulatorService.triggerSimulationCycle();
-    return reply().code(httpStatus.OK);
+    return h.code(httpStatus.OK);
   } catch (err) {
-    return reply(Boom.wrap(err));
+    return Boom.boomify(err);
   }
 };
 

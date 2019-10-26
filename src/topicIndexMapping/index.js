@@ -1,4 +1,4 @@
-const { PRODUCT, REPLY_TO } = require('./esTypes');
+const { PRODUCT, REPLY_TO, PERFORM_ACTION } = require('./esTypes');
 
 const machine1 = [
   {
@@ -45,4 +45,10 @@ const product = [
   },
 ];
 
-module.exports = [...machine1, ...machine2, ...product];
+const action = [
+  {
+    topic: '<ConrodSimulator>/OP_1/machinecommands',
+    mappings: PERFORM_ACTION,
+  },
+];
+module.exports = [...machine1, ...machine2, ...product, ...action];

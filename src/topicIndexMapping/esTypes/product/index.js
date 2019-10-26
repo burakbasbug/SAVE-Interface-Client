@@ -1,9 +1,9 @@
 const es = require('../commonTypes');
 
 const featureObj = {
-  name: es.keyword,
-  unit: es.keyword,
-  description: es.keyword,
+  name: es.keywordNoIndex,
+  unit: es.keywordNoIndex,
+  description: es.keywordNoIndex,
   value: es.float,
 };
 
@@ -19,7 +19,7 @@ module.exports = {
       'Bend.properties': featureObj,
       'GAuntenlngs.properties': featureObj,
       'GAobenlngs.properties': featureObj,
-      KAobenlngs: es.disabled, // TEST AMACLI
+      'KAobenlngs.properties': featureObj,
     },
     usecase_id: es.keywordNoIndex,
     timestamp: es.keywordNoIndex,

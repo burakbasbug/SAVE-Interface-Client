@@ -1,6 +1,5 @@
-const log = require('yalm');
 const mqtt = require('mqtt');
-const uuidv4 = require('uuid/v4');
+// const log = require('yalm');
 const config = require('../../localConfig');
 const {
   onConnectHandler,
@@ -20,7 +19,7 @@ function getConnection() {
         payload: '0',
         retain: true,
       },
-      name: `${config.mqtt.clientName}_${uuidv4()}`,
+      name: `${config.mqtt.clientName}_${1}`,
     };
     conn = mqtt.connect(brokerUrl, mqttOpts);
     // connInstance.on('reconnect', onConnectHandler);

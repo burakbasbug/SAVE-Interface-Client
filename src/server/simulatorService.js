@@ -1,6 +1,6 @@
-const log = require('yalm');
 const Boom = require('boom');
-const config = require('../../localConfig');
+// const log = require('yalm');
+// const config = require('../../localConfig');
 
 let simulationCycleRunning;
 

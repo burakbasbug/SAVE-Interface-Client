@@ -6,25 +6,25 @@ const simulatorService = require('../../../server/simulatorService');
 
 const CALLBACK_TOPIC = config.mqtt.simulator.callbackTopic;
 const REPLYTO_TOPIC = /.*\/replyto/;
-const PRODUCT_TOPIC = /conveyorbelt\/position[0-9]+/;
+const ACTIONS_TOPIC = /OP_1\/machinecommands/;
 
-module.exports = (topic, messageBuffer) => {
+module.exports = (msgTopic, messageBuffer) => {
   let message = messageBuffer.toString();
-  log.debug(`'onMessageHandler: From ${topic} MESSAGE: ${message}`);
-  if (topic.retain) {
+  log.debug(`'onMessageHandler: From ${msgTopic} MESSAGE: ${message}`);
+  if (msgTopic.retain) {
     return;
   }
+  const topic = msgTopic.toString();
   if (topic === CALLBACK_TOPIC) {
     onSimulationEnd();
     return;
-  }
-
-  if (topic.toString().match(REPLYTO_TOPIC)) {
+  } else if (topic.match(REPLYTO_TOPIC)) {
     message = onReplyto(message);
+  } else if (topic.match(ACTIONS_TOPIC)) {
+    // message = onPerformAction(message);
+  } else {
+    indexDocument(topic, message);
   }
-
-  // if (topic.toString().match(PRODUCT_TOPIC)) {}
-
   indexDocument(topic, message);
 };
 
@@ -49,4 +49,18 @@ function onReplyto(msg) {
     }
   }
   return msg;
+}
+
+function onPerformAction(msg) {
+  const { actions, timestamp } = JSON.parse(msg);
+  if (actions && actions[0] && actions[1]) {
+    return JSON.stringify({
+      action1: actions[0],
+      action2: actions[1],
+      timestamp,
+      ts: new Date().getTime(),
+    });
+  }
+  log.err('Object does not match the mapping!', msg);
+  return null;
 }
