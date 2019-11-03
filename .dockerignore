@@ -1,0 +1,10 @@
+.idea
+node_modules
+.editorconfig
+.eslintignore
+.eslintrc
+.gitignore
+.prettierignore
+.prettierrc
+package-lock.json
+README.md
