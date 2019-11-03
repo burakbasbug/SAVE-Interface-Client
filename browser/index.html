@@ -11,5 +11,61 @@
   </head>
   <body>
     <!--  https://semantic-ui.com/introduction/getting-started.html-->
+    <button class="ui primary loading button">Loading</button>
+    <div>
+      <button class="large ui button" id="runOnceButton">
+        RUN ONCE
+      </button>
+
+      <div class="ui left action input" id="runStepsGroup">
+        <button class="ui labeled icon button" id="runSteps_Button">
+          <i class="play icon" id="runSteps_playicon"></i>
+          <i
+            class="stop icon"
+            style="visibility: hidden"
+            id="runSteps_stopicon"
+          ></i>
+          RUN STEPS
+        </button>
+
+        <input
+          type="number"
+          value="3"
+          style="width: 7rem;"
+          min="1"
+          id="runSteps_Input"
+        />
+      </div>
+    </div>
+    <iframe></iframe>
+    <script>
+      /* CONSTANTS */
+      var bluebird = Promise.noConflict();
+      var STATE_SIMULATION_IS_RUNNING = false;
+      var runOnceButton = $('#runOnceButton');
+      var runStepsGroup = $('#runStepsGroup');
+      var runSteps_Button = $('#runSteps_Button');
+      var runSteps_Input = $('#runSteps_Input');
+      var runSteps_stopicon = $('#runSteps_stopicon'); // .show(), .hide(), .toggle()
+      var runSteps_playicon = $('#runSteps_playicon');
+
+      /**
+       * sadece bir HTTP requestini fetch ile gönderen fonksiyon
+       * @returns {Promise<void>}
+       */
+      async function getStatus() {}
+
+      /**
+       * getStatus ile tekrar tekrar req göndererek cycle'in bitmesini bekler
+       * bluebird.delay
+       * saniyede 2 kere req
+       * @returns {Promise<void>}
+       */
+      async function getCycle() {}
+
+      async function runOnce() {}
+
+      async function runSteps() {}
+    </script>
   </body>
 </html>
