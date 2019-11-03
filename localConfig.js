@@ -10,8 +10,8 @@ module.exports = {
     // brokerUrl: 'mqtt://mosquitto:8883',
     brokerUrl: 'mqtt://localhost:8883', // config: /usr/local/etc/mosquitto/mosquitto.conf
     simulator: {
-      callbackTopic: 'returnTo',
-      triggerTopic: 'startSimulation',
+      callbackTopic: '<SystemLauncher>/SystemLauncher_CommFunction/replyto',
+      triggerTopic: '<ConrodSimulator>/ConrodSimulatorController/execute',
       $meta: 'topics for managing the simulator via http endpoints.',
     },
   },
