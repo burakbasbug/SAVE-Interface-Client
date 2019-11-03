@@ -29,8 +29,12 @@ module.exports = (msgTopic, messageBuffer) => {
 };
 
 function onSimulationEnd() {
-  log.debug('onMessageHandler', 'Simulation cycle completed!');
-  simulatorService.setSimulationRunning(false);
+  if (simulatorService.getSimulationRunning()) {
+    simulatorService.setSimulationRunning(false);
+    log.debug('onMessageHandler', 'Simulation cycle completed!');
+  } else {
+    log.debug('onMessageHandler', 'No cycle to complete');
+  }
 }
 
 /**

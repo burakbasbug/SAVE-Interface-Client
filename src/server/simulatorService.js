@@ -1,4 +1,4 @@
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 // const log = require('yalm');
 // const config = require('../../localConfig');
 

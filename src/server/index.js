@@ -12,10 +12,10 @@ const elasticsearchService = require('./elasticsearchClient');
 
 const registerPlugins = async () => {
   await hapiConnection.register({
-    plugin: require('vision'),
+    plugin: require('@hapi/vision'),
   });
   await hapiConnection.register({
-    plugin: require('inert'),
+    plugin: require('@hapi/inert'),
   });
 };
 
@@ -27,10 +27,10 @@ module.exports.start = async () => {
     await hapiConnection.start();
     hapiConnection.route(routes);
     log.info(`HTTP SERVER: ${JSON.stringify(hapiConnection.info)}`);
-    await elasticsearchService.cleanIndexes();
-    await elasticsearchService.disableAutoIndexCreation();
-    await elasticsearchService.createIndices();
-    log.info('elasticsearch indices are ready');
+    // await elasticsearchService.cleanIndexes();
+    // await elasticsearchService.disableAutoIndexCreation();
+    // await elasticsearchService.createIndices();
+    // log.info('elasticsearch indices are ready');
     getConnection();
     log.info('mqtt connection is set!');
   } catch (err) {

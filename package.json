@@ -12,18 +12,18 @@
     "node": ">=8.16.2"
   },
   "dependencies": {
+    "@hapi/boom": "^8.0.1",
+    "@hapi/inert": "^5.2.2",
+    "@hapi/vision": "^5.5.4",
     "async-mqtt": "^2.2.1",
     "bluebird": "^3.5.5",
-    "boom": "^4.3.1",
     "dot-object": "^1.9.0",
     "hapi": "^17.8.5",
     "http-status-codes": "^1.3.2",
-    "inert": "^5.1.3",
     "lodash": "^4.17.11",
     "mqtt": "^2.18.8",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "vision": "^5.4.4",
     "yalm": "^4.1.0"
   },
   "devDependencies": {

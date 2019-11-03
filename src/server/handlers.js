@@ -1,5 +1,5 @@
 const httpStatus = require('http-status-codes');
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 const log = require('yalm');
 const mqttService = require('../MqttClient');
 const config = require('../../localConfig');
@@ -30,8 +30,9 @@ const triggerSimulation = (request, h) => {
   try {
     mqttService.getConnection().publish(TRIGGER_TOPIC, getTriggerMessage());
     simulatorService.triggerSimulationCycle();
-    return h.code(httpStatus.OK);
+    return h.response().code(httpStatus.OK);
   } catch (err) {
+    log.debug(err);
     return Boom.boomify(err);
   }
 };
