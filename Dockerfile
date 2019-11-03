@@ -4,7 +4,7 @@ WORKDIR /SAVE-Interface-Client
 COPY . /SAVE-Interface-Client
 
 EXPOSE 3000
-EXPOSE 1883
+EXPOSE 8883
 
 # ARG anyEnvVar
 ENV NODE_ENV=production

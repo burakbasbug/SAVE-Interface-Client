@@ -9,7 +9,7 @@ services:
     ports: # like publish (docker cli) mapping for localhost-container
       - '3000:3000'
     expose: # ports visible only between containers on network
-      - '1883'
+      - '8883'
       - '9200'
     depends_on:
       - mosquitto
@@ -48,7 +48,7 @@ services:
     networks:
       - save_network
     ports:
-      - '1883:1883'
+      - '8883:1883'
 
 networks:
   save_network:
