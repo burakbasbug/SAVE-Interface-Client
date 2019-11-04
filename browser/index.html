@@ -12,35 +12,40 @@
   <body>
     <!--  https://semantic-ui.com/introduction/getting-started.html-->
     <div>
-      <button class="large ui button" id="runOnceButton" onclick="runOnce()">
+      <button
+        class="large ui button triggerSet"
+        id="runOnceButton"
+        onclick="runOnce()"
+      >
         RUN ONCE
       </button>
 
       <div class="ui left action input" id="runStepsGroup">
         <button
-          class="ui labeled icon button"
+          class="ui labeled icon button triggerSet"
           id="runSteps_Button"
           onclick="runSteps()"
         >
-          <i class="play icon stepicon" id="runSteps_playicon"></i>
-          <i
-            class="stop icon stepicon"
-            style="visibility: hidden"
-            id="runSteps_stopicon"
-          ></i>
+          <i class="play icon"></i>
           RUN STEPS
         </button>
 
         <input
           type="number"
+          class="triggerSet"
           value="3"
           style="width: 7rem;"
           min="1"
           id="runSteps_Input"
         />
       </div>
-      <button class="large ui button" onclick="getStatus()">
-        INFO
+      <button
+        class="large ui button"
+        id="resetButton"
+        onclick="stop()"
+        disabled
+      >
+        STOP
       </button>
     </div>
     <iframe></iframe>
@@ -48,29 +53,36 @@
       /* CONSTANTS */
       let STATE_SIMULATION_IS_RUNNING = false;
       const bluebird = Promise.noConflict();
+      const resetButton = $('#resetButton');
       const runOnceButton = $('#runOnceButton');
-      const runStepsGroup = $('#runStepsGroup');
       const runSteps_Button = $('#runSteps_Button');
       const runSteps_Input = $('#runSteps_Input');
-      const runSteps_stopicon = $('#runSteps_stopicon');
-      const runSteps_playicon = $('#runSteps_playicon');
-      const stepicons = $('.stepicon');
+      const triggerSet = $('.triggerSet');
       const serverUrl = 'http://localhost:3000';
       const MQTT_FAILED_MSG = 'MQTT NOT CONNECTED';
+      initialCheck();
 
-      function resetPanel() {
-        runSteps_stopicon.hide();
-        runSteps_playicon.show();
-        STATE_SIMULATION_IS_RUNNING = false;
-        runOnceButton.attr('disabled', false);
-        runSteps_Button.attr('disabled', false);
-        runSteps_Input.attr('disabled', false);
+      async function initialCheck() {
+        resetButton.attr('disabled', false);
+        const { simulationCycleRunning, mqttConnected } = await getStatus();
+        if (mqttConnected) {
+          if (simulationCycleRunning) {
+            alert('Last simulation cycle is not completed.');
+            await runOnce();
+          }
+        } else {
+          alert('No MQTT Connection');
+        }
       }
 
-      function disableButtons() {
-        runOnceButton.attr('disabled', true);
-        runSteps_Button.attr('disabled', true);
-        runSteps_Input.attr('disabled', true);
+      function resetPanel() {
+        STATE_SIMULATION_IS_RUNNING = false;
+        triggerSet.attr('disabled', false);
+        resetButton.attr('disabled', true);
+      }
+
+      function disableTriggers() {
+        triggerSet.attr('disabled', true);
       }
 
       /**
@@ -98,7 +110,8 @@
           return bluebird.resolve();
         }
         if (resp.status === 429) {
-          return bluebird.reject('Too many requests!');
+          console.error('Simulator is already running!');
+          return bluebird.resolve('Too many requests!');
         }
         return bluebird.reject(resp.status + ' - ' + resp.statusText);
       }
@@ -124,15 +137,14 @@
       }
 
       async function runOnce() {
-        if (STATE_SIMULATION_IS_RUNNING) {
-          return;
-        }
         try {
           STATE_SIMULATION_IS_RUNNING = true;
-          disableButtons();
+          disableTriggers();
+          resetButton.attr('disabled', true);
           await trigger();
           await waitUntilCycleDone();
         } catch (e) {
+          console.error(e);
           runOnceButton.transition({
             animation: 'shake',
             duration: 800,
@@ -143,7 +155,33 @@
         }
       }
 
-      async function runSteps() {}
+      async function runSteps() {
+        try {
+          STATE_SIMULATION_IS_RUNNING = true;
+          disableTriggers();
+          resetButton.attr('disabled', false);
+          let counter = parseInt(runSteps_Input.val());
+          while (counter && counter > 0 && STATE_SIMULATION_IS_RUNNING) {
+            await trigger();
+            await waitUntilCycleDone();
+            counter--;
+            runSteps_Input.val(counter);
+          }
+        } catch (e) {
+          console.error(e);
+          runSteps_Button.transition({
+            animation: 'shake',
+            duration: 800,
+          });
+          await bluebird.delay(800);
+        } finally {
+          resetPanel();
+        }
+      }
+
+      function stop() {
+        STATE_SIMULATION_IS_RUNNING = false;
+      }
     </script>
   </body>
 </html>
