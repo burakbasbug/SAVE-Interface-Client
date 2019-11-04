@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-const hapi = require('hapi');
+const hapi = require('@hapi/hapi');
 const log = require('yalm');
 
 const config = require('../../localConfig');

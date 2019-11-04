@@ -9,7 +9,7 @@ services:
     ports: # like publish (docker cli) mapping for localhost-container
       - '3000:3000'
     expose: # ports visible only between containers on network
-      - '8883'
+      - '1883'
       - '9200'
     depends_on:
       - mosquitto
@@ -41,14 +41,14 @@ services:
       - xpack.ml.enabled=false
       - xpack.reporting.enabled=false
       - xpack.searchprofiler.enabled=false
-      - xpack.grokdebugger.enabled
+      - xpack.grokdebugger.enabled=false
 
   mosquitto:
     image: eclipse-mosquitto
     networks:
       - save_network
     ports:
-      - '8883:1883'
+      - '8883:1883' # HOST:CONTAINER
 
 networks:
   save_network:

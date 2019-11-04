@@ -13,17 +13,17 @@
   },
   "dependencies": {
     "@hapi/boom": "^8.0.1",
+    "@hapi/hapi": "^18.4.0",
     "@hapi/inert": "^5.2.2",
     "@hapi/vision": "^5.5.4",
     "async-mqtt": "^2.2.1",
-    "bluebird": "^3.5.5",
+    "bluebird": "^3.7.1",
     "dot-object": "^1.9.0",
-    "hapi": "^17.8.5",
-    "http-status-codes": "^1.3.2",
+    "http-status-codes": "^1.4.0",
     "lodash": "^4.17.11",
     "mqtt": "^2.18.8",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
+    "request-promise": "^4.2.5",
     "yalm": "^4.1.0"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.7.0",
-    "husky": "^3.0.8",
+    "husky": "^3.0.9",
     "prettier": "^1.14.2",
     "pretty-quick": "^1.4.1"
   },

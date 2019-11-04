@@ -1,8 +1,8 @@
 module.exports = {
   logLevel: 'debug',
   http: {
-    // host: '0.0.0.0',
-    host: 'localhost',
+    host: '0.0.0.0',
+    // host: 'localhost',
     port: '3000',
     routes: {
       cors: true,
@@ -10,8 +10,8 @@ module.exports = {
   },
   mqtt: {
     clientName: 'SAVE-Interface-Client',
-    // brokerUrl: 'mqtt://mosquitto:8883',
-    brokerUrl: 'mqtt://localhost:8883', // config: /usr/local/etc/mosquitto/mosquitto.conf
+    brokerUrl: 'mqtt://mosquitto:1883',
+    // brokerUrl: 'mqtt://localhost:8883', // config: /usr/local/etc/mosquitto/mosquitto.conf
     simulator: {
       callbackTopic: '<SystemLauncher>/SystemLauncher_CommFunction/replyto',
       triggerTopic: '<ConrodSimulator>/ConrodSimulatorController/execute',
@@ -19,8 +19,8 @@ module.exports = {
     },
   },
   elasticsearch: {
-    // url: 'http://elasticsearch:9200',
-    url: 'localhost:9200',
+    url: 'http://elasticsearch:9200',
+    // url: 'localhost:9200',
     removeIndicesAtStartup: false,
     settings: {},
   },
