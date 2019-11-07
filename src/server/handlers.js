@@ -32,7 +32,7 @@ const triggerSimulation = (request, h) => {
     simulatorService.triggerSimulationCycle();
     return h.response().code(httpStatus.OK);
   } catch (err) {
-    log.debug(err);
+    log.debug(err.message);
     return Boom.boomify(err);
   }
 };

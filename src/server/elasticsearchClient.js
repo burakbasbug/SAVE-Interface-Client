@@ -3,37 +3,46 @@ const rp = require('request-promise');
 const log = require('yalm');
 const bluebird = require('bluebird');
 const { elasticsearch } = require('../../localConfig');
-const topicIndexNameMapping = require('../topicIndexMapping');
+const topicIndexNameMapping = require('../topicIndexMappings');
+
+const topicIndexMap = [];
+const topics = [];
+const indices = [];
+_.each(topicIndexNameMapping, ({ topic, targetElasticsearchIndexName }) => {
+  topicIndexMap[topic] = targetElasticsearchIndexName;
+  topics.push(topic);
+  indices.push(targetElasticsearchIndexName);
+});
 
 /**
  * https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-index_.html#_automatic_id_generation
  */
-async function indexDocument(index, doc) {
-  const uri = `${elasticsearch.url}/${sanitizeIndexName(index)}/_doc/`;
+async function indexDocument(messageSourceTopic, doc) {
+  const indexName = topicIndexMap[messageSourceTopic];
+  const uri = `${elasticsearch.url}/${indexName}/_doc/`;
   const body = doc;
   log.info('POST ', uri);
   log.debug(`POST body: ${body}`);
 
   const opts = {
-    method: 'POST',
     uri,
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     resolveWithFullResponse: true, // get response object instaed of body directly
     simple: false,
   };
-  await rp(opts).then(res => {
+  try {
+    const res = await rp(opts);
     log.debug(`POST response ${res.statusCode}`);
-    if (!(res.statusCode === 200 || res.statusCode === 201)) {
+    if (res.statusCode !== 200 && res.statusCode !== 201) {
       log.error(
-        `Request status code: ${res.statusCode}, response: ${res.body}`,
-        'DOCUMENT: ',
-        doc
+        `Request status code: ${res.statusCode}, response: ${res.body}. 'DOCUMENT: '${doc}`
       );
     }
-  });
+  } catch (e) {
+    log.err('[indexDocument]', e);
+  }
 }
 
 async function deleteIndices() {
@@ -73,6 +82,31 @@ const settings = {
 };
 
 /**
+ * Builds HTTP Request options to create an Elasticsearch Index using Elasticsearch's "Create index API".
+ * @param indexname
+ * @param indexTypeMapping
+ * @returns {{headers: {'Content-Type': string}, method: string, simple: boolean, body: *, uri: string}}
+ */
+const buildRequestOptions = ({
+  targetElasticsearchIndexName,
+  indexTypeMapping,
+}) => {
+  const settingsWithMappings = {
+    settings,
+    mappings: indexTypeMapping,
+  };
+  const body = JSON.stringify(settingsWithMappings);
+  log.debug(`[createIndices] request options: ${body}`);
+  return {
+    body,
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    uri: `${elasticsearch.url}/${targetElasticsearchIndexName}?include_type_name=false`,
+    simple: false,
+  };
+};
+
+/**
  * https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-create-index.html#_skipping_types
  */
 async function createIndices() {
@@ -80,63 +114,13 @@ async function createIndices() {
     await bluebird.resolve();
   }
   log.info('creating indices');
-  const indicesToCreate = _.map(
-    topicIndexNameMapping,
-    ({ topic, mappings }) => {
-      const indexName = sanitizeIndexName(topic);
-      const settingsWithMappings = {
-        settings,
-        mappings,
-      };
-      const body = JSON.stringify(settingsWithMappings);
-      log.debug('[createIndices]', 'request options:', body);
-      return {
-        uri: `${elasticsearch.url}/${indexName}?include_type_name=false`,
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body,
-        simple: false,
-      };
-    }
-  );
-  const reqs = _.map(indicesToCreate, rp);
+  const indicesToCreate = _.map(topicIndexNameMapping, buildRequestOptions);
+  const requestsPromise = _.map(indicesToCreate, rp);
   await bluebird
-    .all(reqs)
+    .all(requestsPromise)
     .tap(() => log.info('Indices created successfully!'))
     .tapCatch(() => log.err('Index creation failed!'));
 }
-
-/*
-
-create index: PUT /indexname/typename
-create docu : POST /indexname/typename
-
- */
-
-/**
- Elasticsearch index name limitations:
- There are several limitations to what you can name your index. The complete list of limitations are:
-
- Lowercase only
- Cannot include \, /, *, ?, ", <, >, |, ` ` (space character), ,, #
- Indices prior to 7.0 could contain a colon (:), but that’s been deprecated and won’t be supported in 7.0+
- Cannot start with -, _, +
- Cannot be . or ..
- Cannot be longer than 255 bytes (note it is bytes, so multi-byte characters will count towards the 255 limit faster)
- * @param str
- * @return {string}
- */
-function sanitizeIndexName(str) {
-  return _.toLower(str)
-    .replace(/\//g, '_')
-    .replace('<', '')
-    .replace('>', '');
-}
-
-const topics = _.map(topicIndexNameMapping, 'topic');
-const indices = _.map(topics, sanitizeIndexName);
 
 module.exports = {
   topics,

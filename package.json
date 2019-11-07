@@ -6,7 +6,9 @@
     "build": "docker-compose build",
     "stop": "docker-compose down -v",
     "start": "docker-compose up -d && docker-compose logs -f save-client; exit 0;",
-    "lint": "pretty-quick && eslint --fix .; exit 0;"
+    "lint": "pretty-quick && eslint --fix .",
+    "test:schema": "node src/topicIndexMappings/validation.js",
+    "test": "npm run lint && npm run test:schema"
   },
   "engines": {
     "node": ">=8.16.2"
@@ -15,6 +17,7 @@
     "@hapi/boom": "^8.0.1",
     "@hapi/hapi": "^18.4.0",
     "@hapi/inert": "^5.2.2",
+    "@hapi/joi": "^16.1.7",
     "@hapi/vision": "^5.5.4",
     "async-mqtt": "^2.2.1",
     "bluebird": "^3.7.1",
