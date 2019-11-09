@@ -27,11 +27,3 @@ module.exports = {
   },
   timeStamp: es.date,
 };
-
-/*
-TODO:
-1. örnekleri spec icine yerlestir
-2. onlardan en genisini kopyala ve dot formatinda mappings const'una tanimla
-3. bunlar henüz prga baglanmadi, bunlar bitince bunlarsiz calistirmayi dene
-4. buraya kadar geldiyse bunlari bagla.
- */

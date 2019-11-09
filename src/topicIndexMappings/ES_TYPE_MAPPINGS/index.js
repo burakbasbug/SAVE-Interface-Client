@@ -1,8 +1,8 @@
 const dotObject = require('dot-object');
 const product = require('./product');
-const replyTo = require('./replyTo');
+const replyTo = require('./replyto*');
 // const yasdasdkasjbda = require('./requestReset');
-const performAction = require('./actions');
+const performAction = require('./performAction*');
 
 module.exports.PRODUCT = {
   properties: dotObject.object(dotObject.dot(product)),

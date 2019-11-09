@@ -4,6 +4,6 @@ const es = require('../commonTypes');
 module.exports = {
   correlationid: es.keywordNoIndex,
   replyto: es.keywordNoIndex,
-  result: es.keywordNoIndex,
+  result: es.keywordNoIndex, // different than original
   timestamp: es.date,
 };

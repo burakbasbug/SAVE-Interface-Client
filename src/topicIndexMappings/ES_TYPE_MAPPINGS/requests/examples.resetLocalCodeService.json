@@ -1,0 +1,41 @@
+[
+  {
+    "correlationid": "2914898a-c592-43e2-8ef2-23a336ae025c",
+    "replyto": "<aco001_adam>/adam/replyto",
+    "parameter": {
+      "Request": {
+        "featuremap": {},
+        "usecase_id": "",
+        "timestamp": 9,
+        "type": "save.communication.messages.RequestReset"
+      }
+    },
+    "timestamp": 1573300832902
+  },
+  {
+    "correlationid": "2914898a-c592-43e2-8ef2-23a336ae025c",
+    "replyto": "<aco001_adam>/adam/replyto",
+    "parameter": {
+      "Request": {
+        "featuremap": {},
+        "usecase_id": "",
+        "timestamp": 9,
+        "type": "save.communication.messages.RequestReset"
+      }
+    },
+    "timestamp": 1573300832902
+  },
+  {
+    "correlationid": "61637866-b9f4-44fa-b7f3-843ba0a390c2",
+    "replyto": "<aco001_adam>/adam/replyto",
+    "parameter": {
+      "Request": {
+        "featuremap": {},
+        "usecase_id": "",
+        "timestamp": 6,
+        "type": "save.communication.messages.RequestReset"
+      }
+    },
+    "timestamp": 1573300786852
+  }
+]

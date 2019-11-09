@@ -1,0 +1,177 @@
+[
+  {
+    "correlationid": "a2219448-cd68-4163-b759-d378658ea805",
+    "replyto": "sake/replyto",
+    "parameter": {
+      "data": {
+        "featuremap": {
+          "GAobenlngs": {
+            "name": "GAobenlngs",
+            "SD": 0.8816156450184582,
+            "SDriftStatus": "[NoValue_0.0]",
+            "SubState": 0,
+            "driftStatuses": "d----------",
+            "inputDataStatus": "[*---]",
+            "subStateSequence": "j",
+            "OriginalValue": 46.99509790269194,
+            "AVGDriftStatus": "[NoValue_4.0]"
+          }
+        },
+        "usecase_id": "UC1",
+        "timestamp": 0,
+        "type": "save.communication.messages.NewStateInformation"
+      }
+    },
+    "timestamp": 1573300684241
+  },
+  {
+    "correlationid": "06575a2d-1265-4648-97fe-97755ece5d5f",
+    "replyto": "sake/replyto",
+    "parameter": {
+      "data": {
+        "featuremap": {
+          "GAobenlngs": {
+            "name": "GAobenlngs",
+            "SD": 0.6287007164707225,
+            "SDriftStatus": "[NoValue_5.0]",
+            "SubState": 2,
+            "driftStatuses": "----j------",
+            "inputDataStatus": "[*---]",
+            "subStateSequence": "g",
+            "OriginalValue": 46.91521496593639,
+            "AVGDriftStatus": "[NoValue_2.0]"
+          }
+        },
+        "usecase_id": "UC1",
+        "timestamp": 1,
+        "type": "save.communication.messages.NewStateInformation"
+      }
+    },
+    "timestamp": 1573300709575
+  },
+  {
+    "correlationid": "0786b968-18dd-4bb4-afea-117579a87386",
+    "replyto": "sake/replyto",
+    "parameter": {
+      "data": {
+        "featuremap": {
+          "GAobenlngs": {
+            "name": "GAobenlngs",
+            "SD": 0.015612818836095332,
+            "SDriftStatus": "[NoValue_0.0]",
+            "SubState": 2,
+            "driftStatuses": "---------h-",
+            "inputDataStatus": "[*---]",
+            "subStateSequence": "h",
+            "OriginalValue": 46.9450998654947,
+            "AVGDriftStatus": "[NoValue_4.0]"
+          }
+        },
+        "usecase_id": "UC1",
+        "timestamp": 2,
+        "type": "save.communication.messages.NewStateInformation"
+      }
+    },
+    "timestamp": 1573300724974
+  },
+  {
+    "correlationid": "6c93f40a-1288-486d-9264-b381491b7567",
+    "replyto": "sake/replyto",
+    "parameter": {
+      "data": {
+        "featuremap": {
+          "GAobenlngs": {
+            "name": "GAobenlngs",
+            "SD": 0.6702639411513688,
+            "SDriftStatus": "[NoValue_5.0]",
+            "SubState": 2,
+            "driftStatuses": "--------i--",
+            "inputDataStatus": "[***-]",
+            "subStateSequence": "a",
+            "OriginalValue": 46.98601321204651,
+            "AVGDriftStatus": "[NoValue_2.0]"
+          }
+        },
+        "usecase_id": "UC1",
+        "timestamp": 3,
+        "type": "save.communication.messages.NewStateInformation"
+      }
+    },
+    "timestamp": 1573300740426
+  },
+  {
+    "correlationid": "87950fad-9199-4dbc-b3a9-96881954a3ca",
+    "replyto": "sake/replyto",
+    "parameter": {
+      "data": {
+        "featuremap": {
+          "GAobenlngs": {
+            "name": "GAobenlngs",
+            "SD": 0.39988269510573626,
+            "SDriftStatus": "[NoValue_5.0]",
+            "SubState": 3,
+            "driftStatuses": "-----h-----",
+            "inputDataStatus": "[*---]",
+            "subStateSequence": "c",
+            "OriginalValue": 47.05615724871508,
+            "AVGDriftStatus": "[NoValue_4.0]"
+          }
+        },
+        "usecase_id": "UC1",
+        "timestamp": 7,
+        "type": "save.communication.messages.NewStateInformation"
+      }
+    },
+    "timestamp": 1573300801909
+  },
+  {
+    "correlationid": "8644d1d0-7f5e-4848-adc3-0ca28519ffde",
+    "replyto": "sake/replyto",
+    "parameter": {
+      "data": {
+        "featuremap": {
+          "GAobenlngs": {
+            "name": "GAobenlngs",
+            "SD": 0.2027411668118786,
+            "SDriftStatus": "[NoValue_5.0]",
+            "SubState": 3,
+            "driftStatuses": "--------h--",
+            "inputDataStatus": "[***-]",
+            "subStateSequence": "d",
+            "OriginalValue": 46.90812700865561,
+            "AVGDriftStatus": "[NoValue_3.0]"
+          }
+        },
+        "usecase_id": "UC1",
+        "timestamp": 9,
+        "type": "save.communication.messages.NewStateInformation"
+      }
+    },
+    "timestamp": 1573300832638
+  },
+  {
+    "correlationid": "8644d1d0-7f5e-4848-adc3-0ca28519ffde",
+    "replyto": "sake/replyto",
+    "parameter": {
+      "data": {
+        "featuremap": {
+          "GAobenlngs": {
+            "name": "GAobenlngs",
+            "SD": 0.2027411668118786,
+            "SDriftStatus": "[NoValue_5.0]",
+            "SubState": 3,
+            "driftStatuses": "--------h--",
+            "inputDataStatus": "[***-]",
+            "subStateSequence": "d",
+            "OriginalValue": 46.90812700865561,
+            "AVGDriftStatus": "[NoValue_3.0]"
+          }
+        },
+        "usecase_id": "UC1",
+        "timestamp": 9,
+        "type": "save.communication.messages.NewStateInformation"
+      }
+    },
+    "timestamp": 1573300832638
+  }
+]

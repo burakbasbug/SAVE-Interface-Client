@@ -1,0 +1,54 @@
+[
+  {
+    "correlationid": "e3bff945-4ce0-4d48-b37a-b299f0bfe319",
+    "replyto": "code/replyto",
+    "parameter": {
+      "Request": {
+        "featuremap": {},
+        "usecase_id": "",
+        "timestamp": 9,
+        "type": "save.communication.messages.RequestReset"
+      }
+    },
+    "timestamp": 1573300832869
+  },
+  {
+    "correlationid": "44e57ef5-9db1-46f5-8b76-2243d62582b7",
+    "replyto": "code/replyto",
+    "parameter": {
+      "Request": {
+        "featuremap": {},
+        "usecase_id": "",
+        "timestamp": 8,
+        "type": "save.communication.messages.RequestReset"
+      }
+    },
+    "timestamp": 1573300817571
+  },
+  {
+    "correlationid": "583014da-74c5-4331-8c85-32e219cd179a",
+    "replyto": "code/replyto",
+    "parameter": {
+      "Request": {
+        "featuremap": {},
+        "usecase_id": "",
+        "timestamp": 7,
+        "type": "save.communication.messages.RequestReset"
+      }
+    },
+    "timestamp": 1573300802144
+  },
+  {
+    "correlationid": "3498252b-df63-4e35-8ad6-7257678c4ef9",
+    "replyto": "code/replyto",
+    "parameter": {
+      "Request": {
+        "featuremap": {},
+        "usecase_id": "",
+        "timestamp": 4,
+        "type": "save.communication.messages.RequestReset"
+      }
+    },
+    "timestamp": 1573300756044
+  }
+]

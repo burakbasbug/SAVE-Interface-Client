@@ -17,7 +17,7 @@ const mappings = {
     },
   },
   usecase_id: es.keywordNoIndex,
-  timestamp: es.int,
+  timestamp: es.intNoIndex,
   // type: REMOVED,
 };
 

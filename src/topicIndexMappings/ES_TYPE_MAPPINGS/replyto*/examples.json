@@ -1,0 +1,23 @@
+[
+  {
+    "correlationid": "f8ab316f-2919-4d11-9fd5-8720a17172f8",
+    "replyto": "sake/replyto",
+    "result": "OK",
+    "timestamp": 1570864056957
+  },
+  {
+    "correlationid": "de0216fc-f8d5-49dd-ac3c-cc295dba894c",
+    "replyto": "<aco001_adam>/adam/replyto",
+    "result": {
+      "correlationid": "de0216fc-f8d5-49dd-ac3c-cc295dba894c",
+      "replyto": "<aco001_adam>/adam/replyto",
+      "result": {
+        "usecase_id": "",
+        "timestamp": 9,
+        "type": "save.communication.messages.ConfirmResetPerformed"
+      },
+      "timestamp": 1570864057330
+    },
+    "timestamp": 1570864057331
+  }
+]
