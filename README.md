@@ -26,6 +26,12 @@ use:
 1. make sure docker daemon is up and running.
 2. open terminal and run `docker-compose up`
 
+## ES INDEX PATTERNS
+
+1. `product*`
+2. `replyto`
+3.
+
 ## Su anda:
 
 - sadece docker-compose up yapip calistiriyorum

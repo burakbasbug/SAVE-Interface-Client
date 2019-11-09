@@ -1,13 +1,14 @@
 {
   "name": "save-interface-client",
   "version": "1.0.0",
+  "author": "Burak Basbug <e1029465@student.tuwien.ac.at>",
   "private": true,
   "scripts": {
-    "build": "docker-compose build",
+    "build": "node src/topicIndexMappings/generateMapping.js && npm test && docker-compose build",
     "stop": "docker-compose down -v",
     "start": "docker-compose up -d && docker-compose logs -f save-client; exit 0;",
     "lint": "pretty-quick && eslint --fix .",
-    "test:schema": "node src/topicIndexMappings/validation.js",
+    "test:schema": "node src/topicIndexMappings/generateMapping.spec.js",
     "test": "npm run lint && npm run test:schema"
   },
   "engines": {
@@ -23,6 +24,7 @@
     "bluebird": "^3.7.1",
     "dot-object": "^1.9.0",
     "http-status-codes": "^1.4.0",
+    "json2csv": "^4.5.4",
     "lodash": "^4.17.11",
     "mqtt": "^2.18.8",
     "request": "^2.88.0",

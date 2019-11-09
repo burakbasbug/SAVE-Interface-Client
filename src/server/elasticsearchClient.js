@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const log = require('yalm');
 const bluebird = require('bluebird');
 const { elasticsearch } = require('../../localConfig');
-const topicIndexNameMapping = require('../topicIndexMappings');
+const topicIndexNameMapping = require('../GENERATED_TOPIC_INDEX_MAPPINGS');
 
 const topicIndexMap = [];
 const topics = [];

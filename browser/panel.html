@@ -92,7 +92,7 @@
       }
 
       /**
-       * Resolves only for 200
+       * Resolves only for 200 OK, otherwise rejects.
        * @returns {Promise<void>}
        */
       async function getStatus() {
@@ -130,7 +130,7 @@
       }
 
       /**
-       * Sends requests with 2 seconds intervals until the cycle is completed.
+       * Sends requests with 2-seconds-intervals until the cycle is completed.
        * @returns {Promise<void>}
        */
       async function waitUntilCycleDone() {

@@ -1,7 +1,8 @@
 const dotObject = require('dot-object');
 const product = require('./product');
 const replyTo = require('./replyto*');
-// const yasdasdkasjbda = require('./requestReset');
+const requests = require('./requests');
+const newStateInformation = require('./newStateInformation');
 const performAction = require('./performAction*');
 
 module.exports.PRODUCT = {
@@ -14,4 +15,12 @@ module.exports.REPLY_TO = {
 
 module.exports.PERFORM_ACTION = {
   properties: dotObject.object(dotObject.dot(performAction)),
+};
+
+module.exports.NEW_STATE_INFORMATION = {
+  properties: dotObject.object(dotObject.dot(newStateInformation)),
+};
+
+module.exports.REQUESTS = {
+  properties: dotObject.object(dotObject.dot(requests)),
 };
