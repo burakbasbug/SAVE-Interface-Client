@@ -48,10 +48,12 @@
         STOP
       </button>
     </div>
+    <!--
     <iframe
       src="http://localhost:5601"
       style="width: 100%; height: 100%;"
     ></iframe>
+    -->
     <script>
       /* CONSTANTS */
       let STATE_SIMULATION_IS_RUNNING = false;
@@ -63,6 +65,7 @@
       const triggerSet = $('.triggerSet');
       const serverUrl = 'http://localhost:3000';
       const MQTT_FAILED_MSG = 'MQTT NOT CONNECTED';
+      const MAX_DURATION_OF_A_CYCLE_IN_SEC = 60;
       initialCheck();
 
       async function initialCheck() {
@@ -89,7 +92,7 @@
       }
 
       /**
-       * sadece bir HTTP requestini fetch ile gönderen fonksiyon
+       * Resolves only for 200
        * @returns {Promise<void>}
        */
       async function getStatus() {
@@ -97,13 +100,20 @@
         const resp = await fetch(url);
         if (resp.ok) {
           const result = await resp.json();
-          console.log(result);
+          console.info(
+            'simulationCycleRunning: ' + result.simulationCycleRunning,
+            'mqttConnected: ' + result.mqttConnected
+          );
           return result;
         }
-        console.error(resp.status);
+        console.warn(resp.status);
         return bluebird.reject(resp.status + ' - ' + resp.statusText);
       }
 
+      /**
+       * Resolves for 200 OK and 429 TOO_MANY_REQUEST responses
+       * Rejects for 500 Error responses.
+       */
       async function trigger() {
         const resp = await fetch(serverUrl + '/simulation/trigger', {
           method: 'POST',
@@ -113,21 +123,20 @@
           return bluebird.resolve();
         }
         if (resp.status === 429) {
-          console.error('Simulator is already running!');
+          console.info('Simulator is already running!');
           return bluebird.resolve('Too many requests!');
         }
         return bluebird.reject(resp.status + ' - ' + resp.statusText);
       }
 
       /**
-       * getStatus ile tekrar tekrar req göndererek cycle'in bitmesini bekler
-       * bluebird.delay
-       * saniyede 2 kere req
+       * Sends requests with 2 seconds intervals until the cycle is completed.
        * @returns {Promise<void>}
        */
       async function waitUntilCycleDone() {
-        while (true) {
-          await bluebird.delay(1500);
+        let count = MAX_DURATION_OF_A_CYCLE_IN_SEC;
+        while (count) {
+          await bluebird.delay(2000);
           const { simulationCycleRunning, mqttConnected } = await getStatus();
           if (!mqttConnected) {
             return bluebird.reject(MQTT_FAILED_MSG);
@@ -135,17 +144,26 @@
           if (!simulationCycleRunning) {
             break;
           }
+          count--;
+        }
+        if (count === 0) {
+          console.warn('TIMEOUT!! MAKE SURE SIMULATION IS RUNNING!');
+        } else {
+          console.info('cycle completed');
         }
         return bluebird.resolve();
       }
 
       async function runOnce() {
+        console.clear();
         try {
           STATE_SIMULATION_IS_RUNNING = true;
           disableTriggers();
           resetButton.attr('disabled', true);
+          console.group('Trigger Cycle Once');
           await trigger();
           await waitUntilCycleDone();
+          console.groupEnd();
         } catch (e) {
           console.error(e);
           runOnceButton.transition({
@@ -159,14 +177,17 @@
       }
 
       async function runSteps() {
+        console.clear();
         try {
           STATE_SIMULATION_IS_RUNNING = true;
           disableTriggers();
           resetButton.attr('disabled', false);
           let counter = parseInt(runSteps_Input.val());
           while (counter && counter > 0 && STATE_SIMULATION_IS_RUNNING) {
+            console.group('Trigger Cycle ' + counter);
             await trigger();
             await waitUntilCycleDone();
+            console.groupEnd();
             counter--;
             runSteps_Input.val(counter);
           }
