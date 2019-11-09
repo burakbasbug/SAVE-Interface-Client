@@ -45,5 +45,6 @@ module.exports.start = async () => {
     } else {
       log.err('ERROR WITHOUT .message FIELD!!', err);
     }
+    process.exit(1);
   }
 };

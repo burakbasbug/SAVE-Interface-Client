@@ -841,11 +841,11 @@
   },
   {
     "topic": "<ConrodSimulator>/OP_1/machinecommands",
-    "targetElasticsearchIndexName": "machinecommand",
+    "targetElasticsearchIndexName": "perform_action",
     "indexMappings": {
       "properties": {
-        "mappings": {
-          "action1": {
+        "action1": {
+          "properties": {
             "id": {
               "type": "keyword",
               "index": false
@@ -860,8 +860,10 @@
                 }
               }
             }
-          },
-          "action2": {
+          }
+        },
+        "action2": {
+          "properties": {
             "id": {
               "type": "keyword",
               "index": false
@@ -876,15 +878,11 @@
                 }
               }
             }
-          },
-          "usecase_id": {
-            "type": "keyword",
-            "index": false
-          },
-          "timestamp": {
-            "type": "integer",
-            "index": false
           }
+        },
+        "timestamp": {
+          "type": "date",
+          "format": "epoch_millis"
         }
       }
     }

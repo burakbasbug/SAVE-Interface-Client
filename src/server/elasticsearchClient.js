@@ -21,9 +21,6 @@ async function indexDocument(messageSourceTopic, doc) {
   const indexName = topicIndexMap[messageSourceTopic];
   const uri = `${elasticsearch.url}/${indexName}/_doc/`;
   const body = doc;
-  log.info('POST ', uri);
-  log.debug(`POST body: ${body}`);
-
   const opts = {
     uri,
     body,
@@ -34,7 +31,7 @@ async function indexDocument(messageSourceTopic, doc) {
   };
   try {
     const res = await rp(opts);
-    log.debug(`POST response ${res.statusCode}`);
+    log.debug(`POST ${uri}`, `body: ${body}`, `response ${res.statusCode}`);
     if (res.statusCode !== 200 && res.statusCode !== 201) {
       log.error(
         `Request status code: ${res.statusCode}, response: ${res.body}. 'DOCUMENT: '${doc}`
@@ -84,16 +81,16 @@ const settings = {
 /**
  * Builds HTTP Request options to create an Elasticsearch Index using Elasticsearch's "Create index API".
  * @param indexname
- * @param indexTypeMapping
+ * @param indexMappings
  * @returns {{headers: {'Content-Type': string}, method: string, simple: boolean, body: *, uri: string}}
  */
 const buildRequestOptions = ({
   targetElasticsearchIndexName,
-  indexTypeMapping,
+  indexMappings,
 }) => {
   const settingsWithMappings = {
     settings,
-    mappings: indexTypeMapping,
+    mappings: indexMappings,
   };
   const body = JSON.stringify(settingsWithMappings);
   log.debug(`[createIndices] request options: ${body}`);
@@ -102,7 +99,7 @@ const buildRequestOptions = ({
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
     uri: `${elasticsearch.url}/${targetElasticsearchIndexName}?include_type_name=false`,
-    simple: false,
+    simple: true,
   };
 };
 
@@ -114,7 +111,10 @@ async function createIndices() {
     await bluebird.resolve();
   }
   log.info('creating indices');
-  const indicesToCreate = _.map(topicIndexNameMapping, buildRequestOptions);
+  const indicesToCreate = _.map(
+    _.uniqBy(topicIndexNameMapping, 'targetElasticsearchIndexName'),
+    buildRequestOptions
+  );
   const requestsPromise = _.map(indicesToCreate, rp);
   await bluebird
     .all(requestsPromise)
@@ -123,6 +123,7 @@ async function createIndices() {
 }
 
 module.exports = {
+  topicIndexMap,
   topics,
   indices,
   cleanIndexes: deleteIndices,

@@ -78,7 +78,7 @@ const ENUMERATED_TOPICS = topicIndex => {
 const CONSTANT_TOPICS = [
   {
     topic: '<ConrodSimulator>/OP_1/machinecommands',
-    targetElasticsearchIndexName: 'machinecommand',
+    targetElasticsearchIndexName: 'perform_action',
     indexMappings: PERFORM_ACTION,
   },
   {

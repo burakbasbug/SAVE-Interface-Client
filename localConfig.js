@@ -24,7 +24,7 @@ module.exports = {
   elasticsearch: {
     url: 'http://elasticsearch:9200',
     // url: 'localhost:9200',
-    removeIndicesAtStartup: false,
+    removeIndicesAtStartup: true,
     settings: {},
   },
   kibana: {

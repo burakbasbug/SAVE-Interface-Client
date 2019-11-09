@@ -3,7 +3,7 @@ version: '3.7'
 services:
   save-client:
     build: .
-    image: save-client
+    image: save-client:1.0.0
     networks:
       - save_network
     ports: # like publish (docker cli) mapping for localhost-container
@@ -13,7 +13,14 @@ services:
       - '9200'
     depends_on:
       - mosquitto
-  #    env_file: .env
+    #    env_file: .env
+    volumes:
+      - type: bind
+        source: ./src/GENERATED_TOPIC_INDEX_MAPPINGS.json
+        target: /SAVE-Interface-Client/src/GENERATED_TOPIC_INDEX_MAPPINGS.json
+      - type: bind
+        source: ./localConfig.js
+        target: /SAVE-Interface-Client/localConfig.js
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.1
