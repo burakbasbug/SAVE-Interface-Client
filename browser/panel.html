@@ -185,6 +185,13 @@
       function stop() {
         STATE_SIMULATION_IS_RUNNING = false;
       }
+
+      window.onbeforeunload = function(e) {
+        if (STATE_SIMULATION_IS_RUNNING) {
+          if (e) e.returnValue = 'Simulation is running, are you sure?';
+          return 'Simulation is running, are you sure?';
+        }
+      };
     </script>
   </body>
 </html>
