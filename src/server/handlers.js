@@ -27,6 +27,9 @@ const getTriggerMessage = () =>
 
 const triggerSimulation = (request, h) => {
   log.info(request.method, request.path);
+  if (!mqttService.clientConnected()) {
+    return new Boom('No MQTT Connection!');
+  }
   try {
     mqttService.getConnection().publish(TRIGGER_TOPIC, getTriggerMessage());
     simulatorService.triggerSimulationCycle();
