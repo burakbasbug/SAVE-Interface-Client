@@ -1,4 +1,3 @@
-const { callbackTopic } = require('../../localConfig').mqtt.simulator;
 const { triggerSimulation, getStatus } = require('./handlers');
 const simulatorService = require('./simulatorService');
 

@@ -1,7 +1,7 @@
 [
   {
     "topic": "<ConrodSimulator>/conveyorbelt/position1",
-    "targetElasticsearchIndexName": "product1",
+    "targetElasticsearchIndexName": "products",
     "indexMappings": {
       "properties": {
         "ADDRESS": {
@@ -421,7 +421,7 @@
   },
   {
     "topic": "<ConrodSimulator>/conveyorbelt/position2",
-    "targetElasticsearchIndexName": "product2",
+    "targetElasticsearchIndexName": "products",
     "indexMappings": {
       "properties": {
         "ADDRESS": {
@@ -889,7 +889,7 @@
   },
   {
     "topic": "<ConrodSimulator>/conveyorbelt/position3",
-    "targetElasticsearchIndexName": "product3",
+    "targetElasticsearchIndexName": "products",
     "indexMappings": {
       "properties": {
         "ADDRESS": {

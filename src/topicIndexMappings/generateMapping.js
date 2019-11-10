@@ -30,7 +30,7 @@ const ENUMERATED_TOPICS = topicIndex => {
   return [
     {
       topic: `<ConrodSimulator>/conveyorbelt/position${i}`,
-      targetElasticsearchIndexName: `product${i}`,
+      targetElasticsearchIndexName: `products`,
       indexMappings: PRODUCT,
     },
     {
@@ -83,7 +83,7 @@ const CONSTANT_TOPICS = [
   },
   {
     topic: `<ConrodSimulator>/conveyorbelt/position${NUMBER_OF_MACHINES + 1}`,
-    targetElasticsearchIndexName: `product${NUMBER_OF_MACHINES + 1}`,
+    targetElasticsearchIndexName: `products`,
     indexMappings: PRODUCT,
   },
   // {
