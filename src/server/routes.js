@@ -1,4 +1,6 @@
+const { callbackTopic } = require('../../localConfig').mqtt.simulator;
 const { triggerSimulation, getStatus } = require('./handlers');
+const simulatorService = require('./simulatorService');
 
 module.exports = [
   {
@@ -10,5 +12,13 @@ module.exports = [
     method: 'GET',
     path: '/simulation/status',
     handler: getStatus,
+  },
+  {
+    method: 'GET',
+    path: '/simulation/reset',
+    handler: () => {
+      simulatorService.setSimulationRunning(false);
+      return {};
+    },
   },
 ];

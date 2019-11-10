@@ -22,8 +22,6 @@ module.exports = (msgTopic, messageBuffer) => {
     message = onReplyto(message);
   } else if (topic.match(ACTIONS_TOPIC)) {
     message = onPerformAction(message);
-  } else {
-    indexDocument(topic, message);
   }
   indexDocument(topic, message);
 };

@@ -4,15 +4,18 @@
   "author": "Burak Basbug <e1029465@student.tuwien.ac.at>",
   "private": true,
   "scripts": {
-    "build:map": "node src/util.js",
-    "build": "npm test && docker-compose build --parallel",
-    "clean:docker": "docker image prune -f",
-    "hardformat": "docker system prune",
-    "stop": "docker-compose down -v",
-    "start": "docker-compose up -d && docker-compose logs -f save-client; exit 0;",
+    "rebuild:map": "node src/util.js",
+    "rebuild": "npm test && docker-compose build --parallel",
+    "start": "docker-compose up -d && npm run log",
+    "stop": "docker-compose down",
+    "restart": "npm stop && npm start",
+    "stop_and_clean_volume": "docker-compose down -v",
+    "test": "npm run lint && npm run test:schema",
+    "log": "docker-compose logs -f save-client; exit 0;",
     "lint": "pretty-quick && eslint --fix .",
     "test:schema": "node src/topicIndexMappings/generateMapping.spec.js",
-    "test": "npm run lint && npm run test:schema"
+    "clean:docker": "docker image prune -f",
+    "hardformat": "docker system prune"
   },
   "engines": {
     "node": ">=8.16.2"

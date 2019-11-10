@@ -27,7 +27,4 @@ module.exports = {
     removeIndicesAtStartup: true,
     settings: {},
   },
-  kibana: {
-    url: 'localhost:5601',
-  },
 };

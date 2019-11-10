@@ -19,5 +19,5 @@ module.exports = {
     timestamp: es.disabled,
     type: es.disabled,
   },
-  timeStamp: es.date,
+  timestamp: es.date,
 };

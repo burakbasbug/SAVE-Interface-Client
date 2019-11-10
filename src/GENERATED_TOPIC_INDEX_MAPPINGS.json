@@ -334,7 +334,7 @@
             }
           }
         },
-        "timeStamp": {
+        "timestamp": {
           "type": "date",
           "format": "epoch_millis"
         }
@@ -754,7 +754,7 @@
             }
           }
         },
-        "timeStamp": {
+        "timestamp": {
           "type": "date",
           "format": "epoch_millis"
         }
