@@ -3,22 +3,14 @@ const rp = require('request-promise');
 const log = require('yalm');
 const bluebird = require('bluebird');
 const { elasticsearch } = require('../../localConfig');
-const topicIndexNameMapping = require('../GENERATED_TOPIC_INDEX_MAPPINGS');
-
-const topicIndexMap = [];
-const topics = [];
-const indices = [];
-_.each(topicIndexNameMapping, ({ topic, targetElasticsearchIndexName }) => {
-  topicIndexMap[topic] = targetElasticsearchIndexName;
-  topics.push(topic);
-  indices.push(targetElasticsearchIndexName);
-});
+const topicIndexMap = require('../GENERATED_topic_index_mapping');
+const elasticsearchIndices = require('../GENERATED_elasticsearch_indices');
 
 /**
  * https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-index_.html#_automatic_id_generation
  */
 async function indexDocument(messageSourceTopic, doc) {
-  const indexName = topicIndexMap[messageSourceTopic];
+  const { indexName } = _.find(topicIndexMap, { topic: messageSourceTopic });
   const uri = `${elasticsearch.url}/${indexName}/_doc/`;
   const body = doc;
   const opts = {
@@ -84,10 +76,7 @@ const settings = {
  * @param indexMappings
  * @returns {{headers: {'Content-Type': string}, method: string, simple: boolean, body: *, uri: string}}
  */
-const buildRequestOptions = ({
-  targetElasticsearchIndexName,
-  indexMappings,
-}) => {
+const buildRequestOptions = ({ indexName, indexMappings }) => {
   const settingsWithMappings = {
     settings,
     mappings: indexMappings,
@@ -98,7 +87,7 @@ const buildRequestOptions = ({
     body,
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
-    uri: `${elasticsearch.url}/${targetElasticsearchIndexName}?include_type_name=false`,
+    uri: `${elasticsearch.url}/${indexName}?include_type_name=false`,
     simple: true,
   };
 };
@@ -111,10 +100,7 @@ async function createIndices() {
     await bluebird.resolve();
   }
   log.info('creating indices');
-  const indicesToCreate = _.map(
-    _.uniqBy(topicIndexNameMapping, 'targetElasticsearchIndexName'),
-    buildRequestOptions
-  );
+  const indicesToCreate = _.map(elasticsearchIndices, buildRequestOptions);
   const requestsPromise = _.map(indicesToCreate, rp);
   await bluebird
     .all(requestsPromise)
@@ -123,9 +109,6 @@ async function createIndices() {
 }
 
 module.exports = {
-  topicIndexMap,
-  topics,
-  indices,
   cleanIndexes: deleteIndices,
   indexDocument,
   createIndices,

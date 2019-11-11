@@ -1,12 +1,13 @@
 const log = require('yalm');
 const _ = require('lodash');
 const config = require('../../../localConfig');
-const { topics } = require('../../server/elasticsearchClient');
+const topicIndexMapping = require('../../GENERATED_topic_index_mapping');
 
 let conn;
 
 const subscribeMetricTopics = () => {
   log.info('subscribing metric topics');
+  const topics = _.map(topicIndexMapping, 'topic');
   _.each(topics, topic => {
     conn.subscribe(topic, err => {
       if (err) {

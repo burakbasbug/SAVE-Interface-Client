@@ -1,4 +1,4 @@
-"topic","targetElasticsearchIndexName"
+"topic","indexName"
 "<ConrodSimulator>/OP_1/machinecommands","perform_action"
 "<ConrodSimulator>/conveyorbelt/position1","products"
 "<ConrodSimulator>/conveyorbelt/position2","products"

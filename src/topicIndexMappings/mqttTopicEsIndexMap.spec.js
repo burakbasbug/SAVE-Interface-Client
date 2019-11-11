@@ -2,7 +2,7 @@ const Joi = require('@hapi/joi');
 const log = require('yalm');
 const _ = require('lodash');
 
-const data = require('../GENERATED_TOPIC_INDEX_MAPPINGS');
+const data = require('../GENERATED_topic_index_mapping');
 
 const schema = Joi.array().items(
   Joi.object({
@@ -10,17 +10,13 @@ const schema = Joi.array().items(
       .min(1)
       .required(),
 
-    targetElasticsearchIndexName: Joi.string()
+    indexName: Joi.string()
       .lowercase()
       .disallow('\\', '/', '*', '?', '"', '<', '>', '|', ' ', '#', ',', ':')
       .pattern(/[^(_|+|\-)].*/)
       .min(1)
       .max(255)
       .required(),
-
-    indexMappings: Joi.object({
-      properties: Joi.object().required(),
-    }).required(),
   }).required()
 );
 

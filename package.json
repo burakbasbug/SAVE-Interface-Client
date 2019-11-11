@@ -13,7 +13,7 @@
     "test": "npm run lint && npm run test:schema",
     "log": "docker-compose logs -f save-client; exit 0;",
     "lint": "pretty-quick && eslint --fix .",
-    "test:schema": "node src/topicIndexMappings/generateMapping.spec.js",
+    "test:schema": "node src/topicIndexMappings/mqttTopicEsIndexMap.spec.js",
     "clean:docker": "docker image prune -f",
     "hardformat": "docker system prune"
   },

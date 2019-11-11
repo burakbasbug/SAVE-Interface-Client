@@ -1,7 +1,7 @@
 /**
  * @file The module is responsible for collecting and generating the MQTT topics to elasticsearch index mappings.
  * Topic names in the file are stored as template strings to enable enumeration of the topics.
- * Each mapping json MUST have 3 fields: "topic", "targetElasticsearchIndexname" and "indexMapping".
+ * Each mapping json MUST have 3 fields: "topic", "es_index" and "indexMapping".
  */
 
 const _ = require('lodash');
@@ -12,7 +12,7 @@ const {
   PERFORM_ACTION,
   NEW_STATE_INFORMATION,
   REQUESTS,
-} = require('./elasticsearchTypeMappings');
+} = require('./elasticsearchIndices');
 
 function to3Digits(nr) {
   return _.padStart(nr, 3, '0');
@@ -30,44 +30,36 @@ const ENUMERATED_TOPICS = topicIndex => {
   return [
     {
       topic: `<ConrodSimulator>/conveyorbelt/position${i}`,
-      targetElasticsearchIndexName: `products`,
-      indexMappings: PRODUCT,
+      es_index: PRODUCT,
     },
     {
       topic: `<aco${to3Digits(i)}_sake>/sake/replyto`,
-      targetElasticsearchIndexName: 'replyto',
-      indexMappings: REPLY_TO,
+      es_index: REPLY_TO,
     },
     {
       topic: `<aco${to3Digits(i)}_adam>/adam/replyto`,
-      targetElasticsearchIndexName: 'replyto',
-      indexMappings: REPLY_TO,
+      es_index: REPLY_TO,
     },
     {
       topic: `<aco${to3Digits(i)}_code>/code/replyto`,
-      targetElasticsearchIndexName: 'replyto',
-      indexMappings: REPLY_TO,
+      es_index: REPLY_TO,
     },
 
     {
       topic: `<aco${to3Digits(i)}_adam>/adam/resetOtherCodeService`,
-      targetElasticsearchIndexName: 'requests',
-      indexMappings: REQUESTS,
+      es_index: REQUESTS,
     },
     {
       topic: `<aco${to3Digits(i)}_code>/code/processdata`,
-      targetElasticsearchIndexName: 'new_state_information',
-      indexMappings: NEW_STATE_INFORMATION,
+      es_index: NEW_STATE_INFORMATION,
     },
     {
       topic: `<aco${to3Digits(i)}_adam>/adam/costEstimateLocalCodeService`,
-      targetElasticsearchIndexName: 'requests',
-      indexMappings: REQUESTS,
+      es_index: REQUESTS,
     },
     {
       topic: `<aco${to3Digits(i)}_adam>/adam/resetLocalCodeService`,
-      targetElasticsearchIndexName: 'requests',
-      indexMappings: REQUESTS,
+      es_index: REQUESTS,
     },
   ];
 };
@@ -78,26 +70,27 @@ const ENUMERATED_TOPICS = topicIndex => {
 const CONSTANT_TOPICS = [
   {
     topic: '<ConrodSimulator>/OP_1/machinecommands',
-    targetElasticsearchIndexName: 'perform_action',
-    indexMappings: PERFORM_ACTION,
+    es_index: PERFORM_ACTION,
   },
   {
     topic: `<ConrodSimulator>/conveyorbelt/position${NUMBER_OF_MACHINES + 1}`,
-    targetElasticsearchIndexName: `products`,
-    indexMappings: PRODUCT,
+    es_index: PRODUCT,
   },
-  // {
-  //   topic: `<aco001_sake>/sake/processdata`,
-  //   targetElasticsearchIndexName: 'product??',
-  //   indexMappings: PRODUCT,
-  // },
 ];
 
 function enumerateTopics() {
   const objects = Array(NUMBER_OF_MACHINES);
   // index + 1 because topics start from 1
-  return _.map(objects, (obj, index) => ENUMERATED_TOPICS(index + 1));
+  const enumeratedTopicsArray = _.map(objects, (obj, index) =>
+    ENUMERATED_TOPICS(index + 1)
+  );
+  return _.flattenDeep([enumeratedTopicsArray, CONSTANT_TOPICS]);
 }
 
-module.exports = _.flattenDeep([enumerateTopics(), CONSTANT_TOPICS]);
-// readme'ye bunun notu eklenecek diye todo notu koy.
+module.exports = _.map(
+  enumerateTopics(),
+  ({ topic, es_index: { indexName } }) => ({
+    topic,
+    indexName,
+  })
+);

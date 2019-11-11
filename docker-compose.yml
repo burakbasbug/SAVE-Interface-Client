@@ -16,8 +16,11 @@ services:
     #    env_file: .env
     volumes:
       - type: bind
-        source: ./src/GENERATED_TOPIC_INDEX_MAPPINGS.json
-        target: /SAVE-Interface-Client/src/GENERATED_TOPIC_INDEX_MAPPINGS.json
+        source: ./src/GENERATED_elasticsearch_indices.json
+        target: /SAVE-Interface-Client/src/GENERATED_elasticsearch_indices.json
+      - type: bind
+        source: ./src/GENERATED_topic_index_mapping.json
+        target: /SAVE-Interface-Client/src/GENERATED_topic_index_mapping.json
       - type: bind
         source: ./localConfig.js
         target: /SAVE-Interface-Client/localConfig.js
