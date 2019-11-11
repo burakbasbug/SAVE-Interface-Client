@@ -1,5 +1,5 @@
-{
-  "PRODUCT": {
+[
+  {
     "indexName": "products",
     "indexMappings": {
       "properties": {
@@ -156,7 +156,7 @@
       }
     }
   },
-  "REPLY_TO": {
+  {
     "indexName": "replyto",
     "indexMappings": {
       "properties": {
@@ -179,7 +179,7 @@
       }
     }
   },
-  "REQUESTS": {
+  {
     "indexName": "requests",
     "indexMappings": {
       "properties": {
@@ -217,7 +217,7 @@
       }
     }
   },
-  "NEW_STATE_INFORMATION": {
+  {
     "indexName": "new_state_information",
     "indexMappings": {
       "properties": {
@@ -289,7 +289,7 @@
       }
     }
   },
-  "PERFORM_ACTION": {
+  {
     "indexName": "perform_action",
     "indexMappings": {
       "properties": {
@@ -336,4 +336,4 @@
       }
     }
   }
-}
+]

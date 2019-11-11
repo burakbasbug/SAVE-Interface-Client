@@ -24,7 +24,7 @@ try {
   );
   fs.writeFileSync(
     `${__dirname}/${elasticsearchIndicesFile}.json`,
-    JSON.stringify(elasticsearchIndices, null, 2)
+    JSON.stringify(_.values(elasticsearchIndices), null, 2)
   );
   generateCSV(topicIndexMappings);
 } catch (e) {
