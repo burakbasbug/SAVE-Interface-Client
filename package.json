@@ -4,7 +4,7 @@
   "author": "Burak Basbug <e1029465@student.tuwien.ac.at>",
   "private": true,
   "scripts": {
-    "build:map": "node src/util.js",
+    "build:map": "node src/dataschema/SAVE_Simulation/generator.js",
     "build": "npm test && docker-compose build --parallel",
     "start": "docker-compose up -d && npm run log",
     "stop": "docker-compose down",
@@ -13,7 +13,7 @@
     "test": "npm run lint && npm run test:schema",
     "log": "docker-compose logs -f save-client; exit 0;",
     "lint": "pretty-quick && eslint --fix .",
-    "test:schema": "node src/topicIndexMappings/mqttTopicEsIndexMap.spec.js",
+    "test:schema": "node src/dataschema/SAVE_Simulation/topicIndexMap/index.spec.js",
     "clean:docker": "docker image prune -f",
     "hardformat": "docker system prune"
   },

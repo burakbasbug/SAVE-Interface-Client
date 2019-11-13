@@ -1,8 +1,8 @@
 const httpStatus = require('http-status-codes');
 const Boom = require('@hapi/boom');
 const log = require('yalm');
-const mqttService = require('../MqttClient');
-const config = require('../../localConfig');
+const mqttService = require('../mqttClient');
+const config = require('../../config');
 const simulatorService = require('./simulatorService');
 
 const TRIGGER_TOPIC = config.mqtt.simulator.triggerTopic;

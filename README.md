@@ -4,6 +4,16 @@ Nodejs application to manage mqtt clients over http.
 
 ## Usage
 
+```bash
+npm run build:map
+npm run build
+npm start
+npm run log
+# start the simulation
+...
+npm stop
+```
+
 1. `npm run start:ek` in seperate tab
 1. starts elasticsearch & kibana from bin/elasticsearch & bin/kibana
 1. write pid of elasticsearch to bin/pid file
@@ -76,5 +86,8 @@ use:
 - Explain that types are skipped and there are no types during index creation.
   - https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-create-index.html#_skipping_types
 - Yeni bir topic eklemek icin ne yapmak gerek.
+
   - varsa elasticsearch mappingType'ini yaratmak gerek
   - `topicIndexNameMapping` modülünde herhangi bir yere `{ topic: topicPath, mappingType: ... }` seklinde eklemek gerek.
+
+- config.js ve dataschema'da degisiklik olursa rebuild'e gerek yok, restart yeterli. dataschema klasoru ve config.js direk container icine aliniyor.

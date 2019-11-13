@@ -1,6 +1,6 @@
 const log = require('yalm');
 const servers = require('./src/server');
-const config = require('./localConfig');
+const config = require('./config');
 
 log.setLevel(config.logLevel);
 

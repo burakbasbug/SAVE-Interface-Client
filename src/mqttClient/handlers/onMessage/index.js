@@ -1,7 +1,7 @@
 const log = require('yalm');
 const _ = require('lodash');
 const { indexDocument } = require('../../../server/elasticsearchClient');
-const config = require('../../../../localConfig');
+const config = require('../../../../config');
 const simulatorService = require('../../../server/simulatorService');
 
 const CALLBACK_TOPIC = config.mqtt.simulator.callbackTopic;

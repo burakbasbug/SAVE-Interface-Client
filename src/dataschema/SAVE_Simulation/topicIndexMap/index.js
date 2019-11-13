@@ -5,14 +5,14 @@
  */
 
 const _ = require('lodash');
-const { NUMBER_OF_MACHINES } = require('../../localConfig').simulation;
+const { NUMBER_OF_MACHINES } = require('../../../../config').simulation;
 const {
   PRODUCT,
   REPLY_TO,
   PERFORM_ACTION,
   NEW_STATE_INFORMATION,
   REQUESTS,
-} = require('./elasticsearchIndices');
+} = require('../elasticsearchIndices');
 
 function to3Digits(nr) {
   return _.padStart(nr, 3, '0');

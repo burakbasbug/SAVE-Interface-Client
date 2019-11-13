@@ -2,9 +2,9 @@ const _ = require('lodash');
 const rp = require('request-promise');
 const log = require('yalm');
 const bluebird = require('bluebird');
-const { elasticsearch } = require('../../localConfig');
-const topicIndexMap = require('../GENERATED_topic_index_mapping');
-const elasticsearchIndices = require('../GENERATED_elasticsearch_indices');
+const { elasticsearch } = require('../../config');
+const topicIndexMap = require('../dataschema/SAVE_Simulation/topicIndexMap_GENERATED');
+const elasticsearchIndices = require('../dataschema/SAVE_Simulation/elasticsearchIndices_GENERATED');
 
 /**
  * https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-index_.html#_automatic_id_generation

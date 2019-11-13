@@ -2,7 +2,7 @@ const Joi = require('@hapi/joi');
 const log = require('yalm');
 const _ = require('lodash');
 
-const data = require('../GENERATED_topic_index_mapping');
+const data = require('../topicIndexMap_GENERATED');
 
 const schema = Joi.array().items(
   Joi.object({

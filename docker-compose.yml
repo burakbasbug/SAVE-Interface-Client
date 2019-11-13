@@ -16,14 +16,14 @@ services:
     #    env_file: .env
     volumes:
       - type: bind
-        source: ./src/GENERATED_elasticsearch_indices.json
-        target: /SAVE-Interface-Client/src/GENERATED_elasticsearch_indices.json
+        source: ./src/dataschema
+        target: /SAVE-Interface-Client/src/dataschema
       - type: bind
-        source: ./src/GENERATED_topic_index_mapping.json
-        target: /SAVE-Interface-Client/src/GENERATED_topic_index_mapping.json
+        source: ./src/dataschema
+        target: /SAVE-Interface-Client/src/dataschema
       - type: bind
-        source: ./localConfig.js
-        target: /SAVE-Interface-Client/localConfig.js
+        source: ./config.js
+        target: /SAVE-Interface-Client/config.js
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.1

@@ -1,7 +1,7 @@
 const log = require('yalm');
 const _ = require('lodash');
-const config = require('../../../localConfig');
-const topicIndexMapping = require('../../GENERATED_topic_index_mapping');
+const config = require('../../../config');
+const topicIndexMapping = require('../../dataschema/SAVE_Simulation/topicIndexMap_GENERATED');
 
 let conn;
 

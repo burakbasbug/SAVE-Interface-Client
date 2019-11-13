@@ -1,6 +1,5 @@
 const Boom = require('@hapi/boom');
 // const log = require('yalm');
-// const config = require('../../localConfig');
 
 let simulationCycleRunning;
 

@@ -2,11 +2,11 @@
 const hapi = require('@hapi/hapi');
 const log = require('yalm');
 
-const config = require('../../localConfig');
+const config = require('../../config');
 
 const hapiConnection = new hapi.Server(config.http);
 const pkg = require('../../package.json');
-const { getConnection } = require('../MqttClient');
+const { getConnection } = require('../mqttClient');
 const routes = require('./routes');
 const elasticsearchService = require('./elasticsearchClient');
 

@@ -2,11 +2,11 @@ const fs = require('fs');
 const { Parser } = require('json2csv');
 const _ = require('lodash');
 const log = require('yalm');
-const topicIndexMappings = require('./topicIndexMappings/mqttTopicEsIndexMap');
-const elasticsearchIndices = require('./topicIndexMappings/elasticsearchIndices');
+const topicIndexMappings = require('./topicIndexMap');
+const elasticsearchIndices = require('./elasticsearchIndices');
 
-const topicIndexMappingFile = 'GENERATED_topic_index_mapping';
-const elasticsearchIndicesFile = 'GENERATED_elasticsearch_indices';
+const topicIndexMappingFile = 'topicIndexMap_GENERATED';
+const elasticsearchIndicesFile = 'elasticsearchIndices_GENERATED';
 
 function generateCSV(data) {
   const fields = ['topic', 'indexName'];
@@ -14,7 +14,7 @@ function generateCSV(data) {
   const parser = new Parser(opts);
   const sortedData = _.sortBy(data, ['topic']);
   const csv = parser.parse(sortedData);
-  fs.writeFileSync(`${__dirname}/${topicIndexMappingFile}.csv`, csv);
+  fs.writeFileSync(`${__dirname}/dataschema_GENERATED.csv`, csv);
 }
 
 try {

@@ -1,6 +1,6 @@
 const mqtt = require('mqtt');
 // const log = require('yalm');
-const config = require('../../localConfig');
+const config = require('../../config');
 const {
   onConnectHandler,
   onMessageHandler,
