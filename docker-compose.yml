@@ -19,9 +19,6 @@ services:
         source: ./src/dataschema
         target: /SAVE-Interface-Client/src/dataschema
       - type: bind
-        source: ./src/dataschema
-        target: /SAVE-Interface-Client/src/dataschema
-      - type: bind
         source: ./config.js
         target: /SAVE-Interface-Client/config.js
 
