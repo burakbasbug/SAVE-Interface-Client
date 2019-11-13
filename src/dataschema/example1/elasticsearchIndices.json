@@ -1,0 +1,25 @@
+[
+  {
+    "indexName": "example1",
+    "indexMappings": {
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "value": {
+          "type": "float"
+        },
+        "location": {
+          "type": "geo_point"
+        },
+        "type": {
+          "type": "keyword"
+        },
+        "timestamp": {
+          "type": "date",
+          "format": "epoch_millis"
+        }
+      }
+    }
+  }
+]
