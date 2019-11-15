@@ -13,8 +13,10 @@ module.exports = {
   },
   mqtt: {
     clientName: 'SAVE-Interface-Client',
-    brokerUrl: 'mqtt://mosquitto:1883',
-    // brokerUrl: 'mqtt://localhost:8883', // config: /usr/local/etc/mosquitto/mosquitto.conf
+    host: 'mosquitto',
+    port: '1883',
+    // host: 'localhost', // config: /usr/local/etc/mosquitto/mosquitto.conf
+    // port: '8883',
     simulator: {
       callbackTopic: '<SystemLauncher>/SystemLauncher_CommFunction/replyto',
       triggerTopic: '<ConrodSimulator>/ConrodSimulatorController/execute',

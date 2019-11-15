@@ -12,7 +12,7 @@ let conn;
 
 function getConnection() {
   function init() {
-    const { brokerUrl } = config.mqtt;
+    const { host, port } = config.mqtt;
     const mqttOpts = {
       will: {
         topic: `${config.mqtt.clientName}/connected`,
@@ -21,7 +21,7 @@ function getConnection() {
       },
       name: `${config.mqtt.clientName}_${1}`,
     };
-    conn = mqtt.connect(brokerUrl, mqttOpts);
+    conn = mqtt.connect(`mqtt://${host}:${port}`, mqttOpts);
     // connInstance.on('reconnect', onConnectHandler);
     conn.on('connect', onConnectHandler.bind(null, conn));
     conn.on('error', err => onErrorHandler(err));
