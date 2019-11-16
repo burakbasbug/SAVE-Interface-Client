@@ -1,5 +1,5 @@
 module.exports = {
-  logLevel: 'debug',
+  logLevel: 'info',
   simulation: {
     NUMBER_OF_MACHINES: 1, // example, 1 or any int
   },
@@ -10,7 +10,7 @@ module.exports = {
       cors: true,
     },
   },
-  mqtt: {
+  mqttClient: {
     clientName: 'SAVE-Interface-Client',
     host: 'mosquitto', // 'localhost',
     port: '1883', // config: /usr/local/etc/mosquitto/mosquitto.conf

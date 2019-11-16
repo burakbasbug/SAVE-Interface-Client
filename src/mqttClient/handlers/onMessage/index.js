@@ -4,7 +4,7 @@ const { indexDocument } = require('../../../server/elasticsearchClient');
 const config = require('../../../../config');
 const simulatorService = require('../../../server/simulatorService');
 
-const CALLBACK_TOPIC = config.mqtt.simulator.callbackTopic;
+const CALLBACK_TOPIC = config.mqttClient.simulator.callbackTopic;
 const REPLYTO_TOPIC = /.*\/replyto/;
 const ACTIONS_TOPIC = /.*\/OP_1\/machinecommands/;
 
@@ -29,7 +29,7 @@ module.exports = (msgTopic, messageBuffer) => {
 function onSimulationEnd() {
   if (simulatorService.getSimulationRunning()) {
     simulatorService.setSimulationRunning(false);
-    log.debug('onMessageHandler', 'Simulation cycle completed!');
+    log.info('onMessageHandler', 'simulation cycle completed');
   } else {
     log.debug('onMessageHandler', 'No cycle to complete');
   }

@@ -37,7 +37,7 @@ async function deleteIndices() {
   if (!elasticsearch.removeIndicesAtStartup) {
     return bluebird.resolve();
   }
-  log.info('deleting elasticsearch indices');
+  log.info('deleting elasticsearch indices...');
   return rp
     .delete(`${elasticsearch.url}/*,-.kibana*`)
     .then(res => log.debug('deleteIndices', res));
@@ -98,13 +98,13 @@ async function createIndices() {
   if (!elasticsearch.removeIndicesAtStartup) {
     await bluebird.resolve();
   }
-  log.info('creating indices');
+  log.info('creating indices...');
   const indicesToCreate = _.map(elasticsearchIndices, buildRequestOptions);
   const requestsPromise = _.map(indicesToCreate, rp);
   await bluebird
     .all(requestsPromise)
-    .tap(() => log.info('Indices created successfully!'))
-    .tapCatch(() => log.err('Index creation failed!'));
+    .tap(() => log.info('elasticsearch indices created successfully!'))
+    .tapCatch(() => log.err('elasticsearch index creation failed!'));
 }
 
 module.exports = {

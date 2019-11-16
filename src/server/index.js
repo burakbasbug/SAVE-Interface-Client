@@ -32,7 +32,7 @@ module.exports.start = async () => {
     await elasticsearchService.createIndices();
     log.info('elasticsearch indices are ready');
     getConnection();
-    log.info('mqtt connection is set!');
+    log.info('mqtt connection established');
   } catch (err) {
     if (err.name === 'RequestError') {
       log.err(
