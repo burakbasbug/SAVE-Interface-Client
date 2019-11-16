@@ -54,7 +54,7 @@ services:
     networks:
       - save_network
     ports:
-      - '8883:1883' # HOST(simulation env) : CONTAINER
+      - '${SIMULATION_MQTT_PORT:-8883}:1883' # HOST:CONTAINER (8883 default)
 
 networks:
   save_network:

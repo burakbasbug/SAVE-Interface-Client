@@ -38,7 +38,7 @@ use:
 
 ## ES INDEX PATTERNS
 
-1. `product*`
+1. `product`
 2. `replyto`
 3.
 
@@ -92,3 +92,7 @@ use:
 
 - config.js ve dataschema'da degisiklik olursa rebuild'e gerek yok, restart yeterli. dataschema klasoru ve config.js direk container icine aliniyor.
 - config.js ile makina numarasi ekleme
+- simulation connects to mosquitto on 8883 by default,
+  - bunu karistirma: can be changed ONLY AT build time `SIMULATION_MQTT_PORT=1883 npm run build`
+- yeni dataschema ekleme nasil oluyor.
+- Dataschema ve config.js
