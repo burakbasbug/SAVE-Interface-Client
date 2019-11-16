@@ -1,4 +1,4 @@
-FROM node:8.16.2-alpine
+FROM node:12.13.0-alpine
 
 WORKDIR /SAVE-Interface-Client
 COPY . /SAVE-Interface-Client
