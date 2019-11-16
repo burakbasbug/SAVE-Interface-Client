@@ -4,21 +4,23 @@
   "author": "Burak Basbug <e1029465@student.tuwien.ac.at>",
   "private": true,
   "scripts": {
-    "build:map": "node src/dataschema/SAVE_Simulation/generator.js",
+    "build:map": "node src/dataschema/simulation_n/generator.js",
+    "build:map_windowsexample": "set SAVE_NUMBER_OF_MACHINES=2&& npm run build:map",
     "build": "npm test && docker-compose build --parallel",
-    "start": "docker-compose up -d && npm run log",
+    "start": "docker-compose up -d && npm run _log",
     "stop": "docker-compose down",
     "restart": "npm stop && npm start",
-    "stop_and_clean_volume": "docker-compose down -v",
-    "test": "npm run lint && npm run test:schema",
-    "log": "docker-compose logs -f save-client; exit 0;",
-    "lint": "pretty-quick && eslint --fix .",
-    "test:schema": "node src/dataschema/SAVE_Simulation/topicIndexMap/index.spec.js",
+    "test": "npm run _lint && npm run _test:schema",
+    "stop:cleanvolume": "docker-compose down -v",
+    "_log": "docker-compose logs -f save-client; exit 0;",
+    "_lint": "pretty-quick && eslint --fix .",
+    "_test:schema": "node src/dataschema/simulation_n/topicIndexMap/index.spec.js",
     "clean:docker": "docker image prune -f",
     "hardformat": "docker system prune"
   },
   "engines": {
-    "node": ">=8.16.2"
+    "node": ">=8.16.2",
+    "npm": ">=6.0.0"
   },
   "dependencies": {
     "@hapi/boom": "^8.0.1",

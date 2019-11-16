@@ -1,0 +1,42 @@
+[
+  {
+    "topic": "<ConrodSimulator>/conveyorbelt/position1",
+    "indexName": "products"
+  },
+  {
+    "topic": "<aco001_sake>/sake/replyto",
+    "indexName": "replyto"
+  },
+  {
+    "topic": "<aco001_adam>/adam/replyto",
+    "indexName": "replyto"
+  },
+  {
+    "topic": "<aco001_code>/code/replyto",
+    "indexName": "replyto"
+  },
+  {
+    "topic": "<aco001_adam>/adam/resetOtherCodeService",
+    "indexName": "requests"
+  },
+  {
+    "topic": "<aco001_code>/code/processdata",
+    "indexName": "new_state_information"
+  },
+  {
+    "topic": "<aco001_adam>/adam/costEstimateLocalCodeService",
+    "indexName": "requests"
+  },
+  {
+    "topic": "<aco001_adam>/adam/resetLocalCodeService",
+    "indexName": "requests"
+  },
+  {
+    "topic": "<ConrodSimulator>/OP_1/machinecommands",
+    "indexName": "perform_action"
+  },
+  {
+    "topic": "<ConrodSimulator>/conveyorbelt/position2",
+    "indexName": "products"
+  }
+]

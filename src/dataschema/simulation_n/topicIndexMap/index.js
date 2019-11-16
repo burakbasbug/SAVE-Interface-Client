@@ -21,48 +21,41 @@ function to3Digits(nr) {
 /**
  * MQTT-Topic - ES-Index mapping for topics with machine number.
  */
-const ENUMERATED_TOPICS = topicIndex => {
-  const i = parseInt(topicIndex, 10);
-  if (_.isNaN(i) || i < 1) {
-    throw new Error('invalid topic number input');
-  }
+const ENUMERATED_TOPICS = i => [
+  {
+    topic: `<ConrodSimulator>/conveyorbelt/position${i}`,
+    es_index: PRODUCT,
+  },
+  {
+    topic: `<aco${to3Digits(i)}_sake>/sake/replyto`,
+    es_index: REPLY_TO,
+  },
+  {
+    topic: `<aco${to3Digits(i)}_adam>/adam/replyto`,
+    es_index: REPLY_TO,
+  },
+  {
+    topic: `<aco${to3Digits(i)}_code>/code/replyto`,
+    es_index: REPLY_TO,
+  },
 
-  return [
-    {
-      topic: `<ConrodSimulator>/conveyorbelt/position${i}`,
-      es_index: PRODUCT,
-    },
-    {
-      topic: `<aco${to3Digits(i)}_sake>/sake/replyto`,
-      es_index: REPLY_TO,
-    },
-    {
-      topic: `<aco${to3Digits(i)}_adam>/adam/replyto`,
-      es_index: REPLY_TO,
-    },
-    {
-      topic: `<aco${to3Digits(i)}_code>/code/replyto`,
-      es_index: REPLY_TO,
-    },
-
-    {
-      topic: `<aco${to3Digits(i)}_adam>/adam/resetOtherCodeService`,
-      es_index: REQUESTS,
-    },
-    {
-      topic: `<aco${to3Digits(i)}_code>/code/processdata`,
-      es_index: NEW_STATE_INFORMATION,
-    },
-    {
-      topic: `<aco${to3Digits(i)}_adam>/adam/costEstimateLocalCodeService`,
-      es_index: REQUESTS,
-    },
-    {
-      topic: `<aco${to3Digits(i)}_adam>/adam/resetLocalCodeService`,
-      es_index: REQUESTS,
-    },
-  ];
-};
+  {
+    topic: `<aco${to3Digits(i)}_adam>/adam/resetOtherCodeService`,
+    es_index: REQUESTS,
+  },
+  {
+    topic: `<aco${to3Digits(i)}_code>/code/processdata`,
+    es_index: NEW_STATE_INFORMATION,
+  },
+  {
+    topic: `<aco${to3Digits(i)}_adam>/adam/costEstimateLocalCodeService`,
+    es_index: REQUESTS,
+  },
+  {
+    topic: `<aco${to3Digits(i)}_adam>/adam/resetLocalCodeService`,
+    es_index: REQUESTS,
+  },
+];
 
 /**
  * MQTT-Topic - ES-Index mapping for particular topics.
@@ -79,7 +72,13 @@ const CONSTANT_TOPICS = [
 ];
 
 function enumerateTopics() {
-  const objects = Array(NUMBER_OF_MACHINES);
+  const i = parseInt(NUMBER_OF_MACHINES, 10);
+  if (_.isNaN(i) || i < 1) {
+    throw new Error(
+      `invalid environments variable: NUMBER_OF_MACHINES=${NUMBER_OF_MACHINES}`
+    );
+  }
+  const objects = Array(i);
   // index + 1 because topics start from 1
   const enumeratedTopicsArray = _.map(objects, (obj, index) =>
     ENUMERATED_TOPICS(index + 1)
