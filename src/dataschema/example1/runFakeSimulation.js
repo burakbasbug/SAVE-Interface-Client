@@ -10,9 +10,6 @@ const client = MQTT.connect('mqtt://localhost:8883');
 const publish = async data => {
   try {
     await client.publish('example1', JSON.stringify(data));
-    // This line doesn't run until the server responds to the publish
-    // await client.end();
-    // This line doesn't run until the client has disconnected without error
   } catch (e) {
     log.err(e.stack);
     process.exit();

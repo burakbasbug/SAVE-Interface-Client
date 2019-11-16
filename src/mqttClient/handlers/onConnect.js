@@ -1,13 +1,15 @@
 const log = require('yalm');
 const _ = require('lodash');
 const config = require('../../../config');
-const topicIndexMapping = require('../../dataschema/simulation_n/topicIndexMap_GENERATED');
+const { topicIndexMap } = require('../../dataschema');
 
 let conn;
 
 const subscribeMetricTopics = () => {
+  console.log(topicIndexMap);
   log.info('subscribing metric topics');
-  const topics = _.map(topicIndexMapping, 'topic');
+  const topics = _.map(topicIndexMap, 'topic');
+  console.log(topics);
   _.each(topics, topic => {
     conn.subscribe(topic, err => {
       if (err) {

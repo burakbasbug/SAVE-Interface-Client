@@ -13,7 +13,6 @@ services:
       - '9200'
     depends_on:
       - mosquitto
-    #    env_file: .env
     volumes:
       - type: bind
         source: ./src/dataschema

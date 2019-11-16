@@ -6,7 +6,6 @@ COPY . /SAVE-Interface-Client
 EXPOSE 3000
 EXPOSE 8883
 
-# ARG anyEnvVar
 ENV NODE_ENV=production
 # RUN echo Elasticsearch indices will be recreated: $anyEnvVar
 

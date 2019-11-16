@@ -4,8 +4,8 @@
   "author": "Burak Basbug <e1029465@student.tuwien.ac.at>",
   "private": true,
   "scripts": {
+    "checkconfig": "docker-compose config",
     "build:map": "node src/dataschema/simulation_n/generator.js",
-    "build:map_windowsexample": "set SAVE_NUMBER_OF_MACHINES=2&& npm run build:map",
     "build": "npm test && docker-compose build --parallel",
     "start": "docker-compose up -d && npm run _log",
     "stop": "docker-compose down",

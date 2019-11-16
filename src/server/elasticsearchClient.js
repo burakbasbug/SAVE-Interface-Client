@@ -3,8 +3,7 @@ const rp = require('request-promise');
 const log = require('yalm');
 const bluebird = require('bluebird');
 const { elasticsearch } = require('../../config');
-const topicIndexMap = require('../dataschema/simulation_n/topicIndexMap_GENERATED');
-const elasticsearchIndices = require('../dataschema/simulation_n/elasticsearchIndices_GENERATED');
+const { topicIndexMap, elasticsearchIndices } = require('../dataschema');
 
 /**
  * https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-index_.html#_automatic_id_generation

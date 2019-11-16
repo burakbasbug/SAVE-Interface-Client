@@ -91,4 +91,4 @@ use:
   - `topicIndexNameMapping` modülünde herhangi bir yere `{ topic: topicPath, mappingType: ... }` seklinde eklemek gerek.
 
 - config.js ve dataschema'da degisiklik olursa rebuild'e gerek yok, restart yeterli. dataschema klasoru ve config.js direk container icine aliniyor.
-- ENV VARIABLE'LAR ILE MAKINA NUMARASI EKLEME "build:map_windowsexample": "set SAVE_NUMBER_OF_MACHINES=2&& npm run build:map",
+- config.js ile makina numarasi ekleme
