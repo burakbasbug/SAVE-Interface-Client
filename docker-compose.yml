@@ -54,7 +54,7 @@ services:
     networks:
       - save_network
     ports:
-      - '8883:1883' # HOST:CONTAINER
+      - '8883:1883' # HOST(simulation env) : CONTAINER
 
 networks:
   save_network:

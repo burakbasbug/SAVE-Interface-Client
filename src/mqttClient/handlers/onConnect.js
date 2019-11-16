@@ -6,10 +6,8 @@ const { topicIndexMap } = require('../../dataschema');
 let conn;
 
 const subscribeMetricTopics = () => {
-  console.log(topicIndexMap);
   log.info('subscribing metric topics');
   const topics = _.map(topicIndexMap, 'topic');
-  console.log(topics);
   _.each(topics, topic => {
     conn.subscribe(topic, err => {
       if (err) {

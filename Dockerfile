@@ -3,9 +3,6 @@ FROM node:8.16.2-alpine
 WORKDIR /SAVE-Interface-Client
 COPY . /SAVE-Interface-Client
 
-EXPOSE 3000
-EXPOSE 8883
-
 ENV NODE_ENV=production
 # RUN echo Elasticsearch indices will be recreated: $anyEnvVar
 
