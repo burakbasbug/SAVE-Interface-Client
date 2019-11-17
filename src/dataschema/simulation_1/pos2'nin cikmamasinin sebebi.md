@@ -1,0 +1,1 @@
+- SORUN ISIMLER. generated1 olanlarin isimlerini degistirmek gerek.

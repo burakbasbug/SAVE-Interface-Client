@@ -7,7 +7,8 @@
 const _ = require('lodash');
 const { NUMBER_OF_MACHINES } = require('../../../../config').simulation;
 const {
-  PRODUCT,
+  INTERMEDIATE_PRODUCTS,
+  FINAL_PRODUCTS,
   REPLY_TO,
   PERFORM_ACTION,
   NEW_STATE_INFORMATION,
@@ -24,7 +25,7 @@ function to3Digits(nr) {
 const ENUMERATED_TOPICS = i => [
   {
     topic: `<ConrodSimulator>/conveyorbelt/position${i}`,
-    es_index: PRODUCT,
+    es_index: INTERMEDIATE_PRODUCTS,
   },
   {
     topic: `<aco${to3Digits(i)}_sake>/sake/replyto`,
@@ -67,7 +68,7 @@ const CONSTANT_TOPICS = [
   },
   {
     topic: `<ConrodSimulator>/conveyorbelt/position${NUMBER_OF_MACHINES + 1}`,
-    es_index: PRODUCT,
+    es_index: FINAL_PRODUCTS,
   },
 ];
 

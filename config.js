@@ -1,7 +1,7 @@
 module.exports = {
-  logLevel: 'info',
+  logLevel: 'debug',
   simulation: {
-    NUMBER_OF_MACHINES: 1, // example, 1 or any int
+    NUMBER_OF_MACHINES: 2, // example, 1 or any int
   },
   http: {
     host: '0.0.0.0', // 'localhost',
@@ -26,3 +26,4 @@ module.exports = {
     settings: {},
   },
 };
+// [indexpattern] description

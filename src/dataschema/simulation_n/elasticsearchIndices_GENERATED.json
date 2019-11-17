@@ -1,6 +1,163 @@
 [
   {
-    "indexName": "products",
+    "indexName": "intermediate_products",
+    "indexMappings": {
+      "properties": {
+        "ADDRESS": {
+          "type": "keyword"
+        },
+        "AGENT": {
+          "type": "keyword"
+        },
+        "VALUE": {
+          "properties": {
+            "name": {
+              "type": "keyword"
+            },
+            "machine_state": {
+              "type": "keyword"
+            },
+            "featuremap": {
+              "properties": {
+                "GAuntenquer": {
+                  "properties": {
+                    "name": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "unit": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "description": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "value": {
+                      "type": "float"
+                    }
+                  }
+                },
+                "GAobenquer": {
+                  "properties": {
+                    "name": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "unit": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "description": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "value": {
+                      "type": "float"
+                    }
+                  }
+                },
+                "Bend": {
+                  "properties": {
+                    "name": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "unit": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "description": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "value": {
+                      "type": "float"
+                    }
+                  }
+                },
+                "GAuntenlngs": {
+                  "properties": {
+                    "name": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "unit": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "description": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "value": {
+                      "type": "float"
+                    }
+                  }
+                },
+                "GAobenlngs": {
+                  "properties": {
+                    "name": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "unit": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "description": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "value": {
+                      "type": "float"
+                    }
+                  }
+                },
+                "KAobenlngs": {
+                  "properties": {
+                    "name": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "unit": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "description": {
+                      "type": "keyword",
+                      "index": false
+                    },
+                    "value": {
+                      "type": "float"
+                    }
+                  }
+                }
+              }
+            },
+            "usecase_id": {
+              "type": "keyword",
+              "index": false
+            },
+            "timestamp": {
+              "type": "keyword",
+              "index": false
+            },
+            "type": {
+              "type": "keyword",
+              "index": false
+            }
+          }
+        },
+        "timeStamp": {
+          "type": "date",
+          "format": "epoch_millis"
+        }
+      }
+    }
+  },
+  {
+    "indexName": "final_products",
     "indexMappings": {
       "properties": {
         "ADDRESS": {

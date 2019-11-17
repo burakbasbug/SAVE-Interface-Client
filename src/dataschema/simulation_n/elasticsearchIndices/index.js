@@ -26,8 +26,12 @@ const REQUESTS = {
 };
 
 module.exports = {
-  PRODUCT: {
-    indexName: 'products',
+  INTERMEDIATE_PRODUCTS: {
+    indexName: 'intermediate_products',
+    indexMappings: PRODUCT,
+  },
+  FINAL_PRODUCTS: {
+    indexName: 'final_products',
     indexMappings: PRODUCT,
   },
   REPLY_TO: {

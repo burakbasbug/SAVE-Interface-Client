@@ -1,7 +1,7 @@
 [
   {
     "topic": "<ConrodSimulator>/conveyorbelt/position1",
-    "indexName": "products"
+    "indexName": "intermediate_products"
   },
   {
     "topic": "<aco001_sake>/sake/replyto",
@@ -33,7 +33,7 @@
   },
   {
     "topic": "<ConrodSimulator>/conveyorbelt/position2",
-    "indexName": "products"
+    "indexName": "intermediate_products"
   },
   {
     "topic": "<aco002_sake>/sake/replyto",
@@ -69,6 +69,6 @@
   },
   {
     "topic": "<ConrodSimulator>/conveyorbelt/position3",
-    "indexName": "products"
+    "indexName": "final_products"
   }
 ]
