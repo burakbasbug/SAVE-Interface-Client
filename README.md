@@ -1,8 +1,12 @@
 # SAVE-Interface-Client
 
-Nodejs application to manage mqtt clients over http.
+Web based user interface to manage and visualize MQTT applications.
 
-## Usage
+## 1. Description
+
+Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+
+## 2. Scripts
 
 ```bash
 npm run build:map
@@ -14,18 +18,17 @@ npm run log
 npm stop
 ```
 
-1. `npm run start:ek` in seperate tab
-1. starts elasticsearch & kibana from bin/elasticsearch & bin/kibana
-1. write pid of elasticsearch to bin/pid file
-1. `node saveClientInterface.js` (starts the application)
-1. start the simulation
-1. if es has no data, let application register some data to the es indices.
-1. open kibana on http://localhost:5601
-1. import kibana settings and dashboards from bin/kibana_export.json
-1. kibana > management (from panel) > saved objects > import (right top)
-1. stop kibana with `ctrl+c`
-1. stop elasticsear with `npm run stop:es`
-1. stop nodejs application with `ctrl+c`
+## 3. Usage
+
+## 4. Development
+
+### 4.1 Structure
+
+### 4.2 Changing the dataschema
+
+## 5. Simulation Notes
+
+- Uygulama simulasyondan gelen verileri Bazi topicleri
 
 ### Presentation
 
