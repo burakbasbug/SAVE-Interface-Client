@@ -34,7 +34,7 @@ async function indexDocument(messageSourceTopic, doc) {
 }
 
 async function deleteIndices() {
-  if (!elasticsearch.removeIndicesAtStartup) {
+  if (!elasticsearch.resetIndicesAtStartup) {
     return bluebird.resolve();
   }
   log.info('deleting elasticsearch indices...');
@@ -95,13 +95,13 @@ const buildRequestOptions = ({ indexName, indexMappings }) => {
  * https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-create-index.html#_skipping_types
  */
 async function createIndices() {
-  if (!elasticsearch.removeIndicesAtStartup) {
-    await bluebird.resolve();
+  if (!elasticsearch.resetIndicesAtStartup) {
+    return bluebird.resolve();
   }
   log.info('creating indices...');
   const indicesToCreate = _.map(elasticsearchIndices, buildRequestOptions);
   const requestsPromise = _.map(indicesToCreate, rp);
-  await bluebird
+  return bluebird
     .all(requestsPromise)
     .tap(() => log.info('elasticsearch indices created successfully!'))
     .tapCatch(() => log.err('elasticsearch index creation failed!'));

@@ -22,7 +22,7 @@ module.exports = {
   },
   elasticsearch: {
     url: 'http://elasticsearch:9200', // 'localhost:9200',
-    removeIndicesAtStartup: true,
+    resetIndicesAtStartup: false,
     settings: {},
   },
 };

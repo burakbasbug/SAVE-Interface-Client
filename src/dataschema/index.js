@@ -11,13 +11,6 @@ switch (numberOfMachines) {
       topicIndexMap: require('./example1/topicIndexMap'),
     };
     break;
-  case '1':
-    log.info(`Active dataschema: Simulation with 1 machine`);
-    module.exports = {
-      elasticsearchIndices: require('./simulation_1/elasticsearchIndices'),
-      topicIndexMap: require('./simulation_1/topicIndexMap'),
-    };
-    break;
   default:
     log.info(`Active dataschema: Simulation with ${numberOfMachines} machine`);
     module.exports = {
