@@ -7,7 +7,7 @@
     "checkconfig": "docker-compose config",
     "build:map": "node src/dataschema/simulation_n/generator.js",
     "build": "npm test && docker-compose build --parallel",
-    "start": "docker-compose up -d && npm run _log",
+    "start": "docker-compose up -d",
     "stop": "docker-compose down",
     "restart": "npm stop && npm start",
     "test": "npm run _lint && npm run _test:schema",

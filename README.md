@@ -8,27 +8,36 @@ Let people know what your project can do specifically. Provide context and add a
 
 ## 2. Scripts
 
-```bash
-npm run build:map
-npm run build
-npm start
-npm run log
-# start the simulation
-...
-npm stop
-```
+- `npm start`: "Starts the application"
+- `npm stop`: Stops containers and removes docker containers, docker networks, volumes, and images created by `npm start".
+- `npm test`: "Runs static code checks and fixes or prints "
+- `npm run checkconfig`: prints the interpreted configuration of the docker-compose file.
+- `npm run build:map`: Runs the generator.js to generate a new dataschema for the simulation, which contains elasticsearch type mappings, MQTT topic list and their mappings. New type mappings should be generated if any change in the simulation or MQTT topics was made.
+- `npm run build`: Creates a new docker image with the latest version of code.
+- `npm run stop:cleanvolume`: "docker-compose down -v",
+- `npm run _log`: "docker-compose logs -f save-client; exit 0;",
+- `npm run _lint`: "pretty-quick && eslint --fix .",
 
 ## 3. Usage
 
+1. make sure docker daemon is up and running by e.g. `docker -v`
+2. open terminal and run `docker-compose up`
+
 ## 4. Development
-
-### 4.1 Structure
-
-### 4.2 Changing the dataschema
 
 ## 5. Simulation Notes
 
-- Uygulama simulasyondan gelen verileri Bazi topicleri
+### 5.1 How to adapt the simulation for 1 and 2 machines
+
+- set `NUMBER_OF_MACHINES` field in the `config.js`
+- generate new data schema by running `npm run build:map`
+- build the docker image with new dataschema by `npm run build`
+- simulation is ready for start
+
+### 5.2 How to connect the simulation to the Mosquitto server
+
+- default mosquitto port number is currently `8883`
+- to change the default port there are two options: Either set the environment variable `SIMULATION_MQTT_PORT` or edit the mosquitto port mapping in the `docker-compose.yml` file.
 
 ### Presentation
 
@@ -63,38 +72,9 @@ use:
 - Acona_client'in initial ES baglantisi (index yaratan) olmassa program ya cikmali yada ES'in kurulmasini orda beklemeli
 - ES'in cok fazla gereksiz ciktisi var, tamamen kisilmali. Kibana'nin da baya gereksiz, belki önemli seyleri secme varsa öyle olmali, yoksa tamamen kisilmali.
 
-## Todo
-
-- windowsda calistirilcak
-  - sadece docker ve java 12 lazim
-
-* `topicIndexNameMapping.js` yerine `config_es_topics.json`
-* mappingler yapilacak: **önce bi topicten message oku, sonra aynen yapistir.**
-  - her type icin ayri dosya yap ?
-  - no index ayari mümkün oldugunca bol
-  - icteki timestamp'in olmamasi sikinti olur mu?
-    - galiba tüm doclarda distaki timestampi okucam
-  - tüm mappingler yarim gün sürse, dashboard olusturmaya vakit kaliyor.
-* Elasticsearch (gereksiz olabilir)
-  - her index creationda uygulanan settingleri REST'ten vermek yerine, docker'dan elasticsearch.yml olarak okut.
-  - Cünküüüü `DE_es ile LOL visualization yapmis` pdf'indeki gibi bi hata gelirse setting gereksiz büyüyecek.
-  - Bunu yaparsan bachelorarbeitta da caption 4.4'e yeni SS yada kod atmak gerek.
-* iframe eklenecek
-* daha basit ve statik bir type mapping (string template yada handlebars falan)
-* es settinglerini post ile göndermek yerine yaml'a yazmaya gerek var mi?
-* https://elastic.github.io/eui/#/
-
 ## important note
 
-- Explain that types are skipped and there are no types during index creation.
-  - https://www.elastic.co/guide/en/elasticsearch/reference/6.8/indices-create-index.html#_skipping_types
-- Yeni bir topic eklemek icin ne yapmak gerek.
-
-  - varsa elasticsearch mappingType'ini yaratmak gerek
-  - `topicIndexNameMapping` modülünde herhangi bir yere `{ topic: topicPath, mappingType: ... }` seklinde eklemek gerek.
-
 - config.js ve dataschema'da degisiklik olursa rebuild'e gerek yok, restart yeterli. dataschema klasoru ve config.js direk container icine aliniyor.
-- config.js ile makina numarasi ekleme
 - simulation connects to mosquitto on 8883 by default,
   - bunu karistirma: can be changed ONLY AT build time `SIMULATION_MQTT_PORT=1883 npm run build`
 - yeni dataschema ekleme nasil oluyor.
