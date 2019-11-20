@@ -4,10 +4,10 @@
   "author": "Burak Basbug <e1029465@student.tuwien.ac.at>",
   "private": true,
   "scripts": {
-    "checkconfig": "docker-compose config",
     "build:map": "node src/dataschema/simulation_n/generator.js",
-    "build": "npm test && docker-compose build --parallel",
+    "build:app": "npm test && docker-compose build --parallel",
     "start": "docker-compose up -d",
+    "start:log": "docker-compose up -d && npm run _log",
     "stop": "docker-compose down",
     "restart": "npm stop && npm start",
     "test": "npm run _lint && npm run _test:schema",
@@ -15,6 +15,7 @@
     "_log": "docker-compose logs -f save-client; exit 0;",
     "_lint": "pretty-quick && eslint --fix .",
     "_test:schema": "node src/dataschema/simulation_n/topicIndexMap/index.spec.js",
+    "dockerconfig": "docker-compose config",
     "clean:docker": "docker image prune -f",
     "hardformat": "docker system prune"
   },

@@ -19,7 +19,7 @@ const subscribeMetricTopics = () => {
 };
 
 const subscribeCallbackTopic = () => {
-  const CALLBACK_TOPIC = config.mqttClient.simulator.callbackTopic;
+  const CALLBACK_TOPIC = config.simulation.callbackTopic;
   conn.subscribe(CALLBACK_TOPIC, err => {
     if (err) {
       log.error(err);

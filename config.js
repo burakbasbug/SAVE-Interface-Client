@@ -1,29 +1,24 @@
 module.exports = {
-  logLevel: 'debug',
+  logLevel: 'debug', // debug, info, warn, error, silent
   simulation: {
-    NUMBER_OF_MACHINES: 2, // example, 1 or any int
+    activeDataschema: 'simulation', // or 'example'
+    triggerTopic: '<ConrodSimulator>/ConrodSimulatorController/execute', // topic to trigger a simulation cycle
+    callbackTopic: '<SystemLauncher>/SystemLauncher_CommFunction/replyto', // topic to call when the triggered cycle is done
   },
   http: {
-    host: '0.0.0.0', // 'localhost',
+    host: '0.0.0.0', // 0.0.0.0 for docker, otherwise 'localhost'
     port: '3000',
     routes: {
-      cors: true,
+      cors: true, // mandatory for localhost requests
     },
   },
-  mqttClient: {
+  mqtt: {
     clientName: 'SAVE-Interface-Client',
-    host: 'mosquitto', // 'localhost',
-    port: '1883', // config: /usr/local/etc/mosquitto/mosquitto.conf
-    simulator: {
-      callbackTopic: '<SystemLauncher>/SystemLauncher_CommFunction/replyto',
-      triggerTopic: '<ConrodSimulator>/ConrodSimulatorController/execute',
-      $meta: 'topics for managing the simulator via http endpoints.',
-    },
+    brokerHost: 'mosquitto', // mosquitto within docker, otherwise 'localhost'
+    brokerPort: '1883', // brew config: /usr/local/etc/mosquitto/mosquitto.conf
   },
   elasticsearch: {
-    url: 'http://elasticsearch:9200', // 'localhost:9200',
-    resetIndicesAtStartup: false,
-    settings: {},
+    url: 'http://elasticsearch:9200', // elasticsearch:9200 for docker, otherwise 'localhost:9200'
+    resetIndicesAtStartup: true, // true = remove all existing indices and create again
   },
 };
-// [indexpattern] description

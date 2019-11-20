@@ -5,7 +5,6 @@
  */
 
 const _ = require('lodash');
-const { NUMBER_OF_MACHINES } = require('../../../../config').simulation;
 const {
   INTERMEDIATE_PRODUCTS,
   FINAL_PRODUCTS,
@@ -61,36 +60,34 @@ const ENUMERATED_TOPICS = i => [
 /**
  * MQTT-Topic - ES-Index mapping for particular topics.
  */
-const CONSTANT_TOPICS = [
+const CONSTANT_TOPICS = numberOfMachines => [
   {
     topic: '<ConrodSimulator>/OP_1/machinecommands',
     es_index: PERFORM_ACTION,
   },
   {
-    topic: `<ConrodSimulator>/conveyorbelt/position${NUMBER_OF_MACHINES + 1}`,
+    topic: `<ConrodSimulator>/conveyorbelt/position${numberOfMachines + 1}`,
     es_index: FINAL_PRODUCTS,
   },
 ];
 
-function enumerateTopics() {
-  const i = parseInt(NUMBER_OF_MACHINES, 10);
+function enumerateTopics(i) {
   if (_.isNaN(i) || i < 1) {
-    throw new Error(
-      `invalid environments variable: NUMBER_OF_MACHINES=${NUMBER_OF_MACHINES}`
-    );
+    throw new Error(`invalid number of machines: ${i}`);
   }
   const objects = Array(i);
   // index + 1 because topics start from 1
   const enumeratedTopicsArray = _.map(objects, (obj, index) =>
     ENUMERATED_TOPICS(index + 1)
   );
-  return _.flattenDeep([enumeratedTopicsArray, CONSTANT_TOPICS]);
+  return _.flattenDeep([enumeratedTopicsArray, CONSTANT_TOPICS(i)]);
 }
 
-module.exports = _.map(
-  enumerateTopics(),
-  ({ topic, es_index: { indexName } }) => ({
-    topic,
-    indexName,
-  })
-);
+module.exports = numberOfMachines =>
+  _.map(
+    enumerateTopics(numberOfMachines),
+    ({ topic, es_index: { indexName } }) => ({
+      topic,
+      indexName,
+    })
+  );

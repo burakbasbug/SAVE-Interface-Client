@@ -5,8 +5,8 @@ const mqttService = require('../mqttClient');
 const config = require('../../config');
 const simulatorService = require('./simulatorService');
 
-const TRIGGER_TOPIC = config.mqttClient.simulator.triggerTopic;
-const CALLBACK_TOPIC = config.mqttClient.simulator.callbackTopic;
+const TRIGGER_TOPIC = config.simulation.triggerTopic;
+const CALLBACK_TOPIC = config.simulation.callbackTopic;
 
 /**
  * Returns 200 OK and the JSON object.

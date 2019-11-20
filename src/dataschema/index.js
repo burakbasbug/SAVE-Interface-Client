@@ -1,21 +1,23 @@
 /* eslint-disable global-require */
 const log = require('yalm');
-const { NUMBER_OF_MACHINES } = require('../../config').simulation;
+const { activeDataschema } = require('../../config').simulation;
 
-const numberOfMachines = NUMBER_OF_MACHINES.toString().toLowerCase();
-switch (numberOfMachines) {
+const dataschema = activeDataschema.toString().toLowerCase();
+switch (dataschema) {
   case 'example':
-    log.info(`Active dataschema: Example`);
+    log.info(`Active dataschema: example`);
     module.exports = {
       elasticsearchIndices: require('./example1/elasticsearchIndices'),
       topicIndexMap: require('./example1/topicIndexMap'),
     };
     break;
-  default:
-    log.info(`Active dataschema: Simulation with ${numberOfMachines} machine`);
+  case 'simulation':
+    log.info(`Active dataschema: simulation`);
     module.exports = {
       elasticsearchIndices: require('./simulation_n/elasticsearchIndices_GENERATED'),
       topicIndexMap: require('./simulation_n/topicIndexMap_GENERATED'),
     };
     break;
+  default:
+    throw new Error(`Invalid name for activeDataschema: ${activeDataschema}`);
 }

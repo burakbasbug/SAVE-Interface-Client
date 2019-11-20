@@ -4,7 +4,7 @@ const { indexDocument } = require('../../../server/elasticsearchClient');
 const config = require('../../../../config');
 const simulatorService = require('../../../server/simulatorService');
 
-const CALLBACK_TOPIC = config.mqttClient.simulator.callbackTopic;
+const CALLBACK_TOPIC = config.simulation.callbackTopic;
 const REPLYTO_TOPIC = /.*\/replyto/;
 const ACTIONS_TOPIC = /.*\/OP_1\/machinecommands/;
 

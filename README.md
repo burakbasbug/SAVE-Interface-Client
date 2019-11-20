@@ -18,18 +18,26 @@ Let people know what your project can do specifically. Provide context and add a
 - `npm run _log`: "docker-compose logs -f save-client; exit 0;",
 - `npm run _lint`: "pretty-quick && eslint --fix .",
 
-## 3. Usage
+## 4. Usage
+
+### 1. Building the application
+
+### 2. Running the application with SAVE Simulator
+
+### 3. Running the application with Example MQTT Application
+
+### 4. Changing the dataschema
+
+### 5. Adding new dataschema
 
 1. make sure docker daemon is up and running by e.g. `docker -v`
 2. open terminal and run `docker-compose up`
-
-## 4. Development
 
 ## 5. Simulation Notes
 
 ### 5.1 How to adapt the simulation for 1 and 2 machines
 
-- set `NUMBER_OF_MACHINES` field in the `config.js`
+- ~set `NUMBER_OF_MACHINES` field in the `config.js`~
 - generate new data schema by running `npm run build:map`
 - build the docker image with new dataschema by `npm run build`
 - simulation is ready for start
@@ -37,7 +45,7 @@ Let people know what your project can do specifically. Provide context and add a
 ### 5.2 How to connect the simulation to the Mosquitto server
 
 - default mosquitto port number is currently `8883`
-- to change the default port there are two options: Either set the environment variable `SIMULATION_MQTT_PORT` or edit the mosquitto port mapping in the `docker-compose.yml` file.
+- to change the default port there are two options: Either set the environment variable `SAVE_MQTT_PORT` or edit the mosquitto port mapping in the `docker-compose.yml` file.
 
 ### Presentation
 
@@ -76,6 +84,12 @@ use:
 
 - config.js ve dataschema'da degisiklik olursa rebuild'e gerek yok, restart yeterli. dataschema klasoru ve config.js direk container icine aliniyor.
 - simulation connects to mosquitto on 8883 by default,
-  - bunu karistirma: can be changed ONLY AT build time `SIMULATION_MQTT_PORT=1883 npm run build`
+  - bunu karistirma: can be changed ONLY AT build time `SAVE_MQTT_PORT=1883 npm run build`
 - yeni dataschema ekleme nasil oluyor.
 - Dataschema ve config.js
+
+# TODO
+
+// bin'deki export.json eski galiba, simulation icindeki yeni. Onu bi kontrol et.
+// readme.md bitir.
+// commentleri bi yere not almak lazim. ör bear'a at.

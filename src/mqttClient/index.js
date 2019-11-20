@@ -12,16 +12,16 @@ let conn;
 
 function getConnection() {
   function init() {
-    const { host, port } = config.mqttClient;
+    const { brokerHost, brokerPort } = config.mqtt;
     const mqttOpts = {
       will: {
-        topic: `${config.mqttClient.clientName}/connected`,
+        topic: `${config.mqtt.clientName}/connected`,
         payload: '0',
         retain: true,
       },
-      name: `${config.mqttClient.clientName}_${1}`,
+      name: `${config.mqtt.clientName}_${1}`,
     };
-    conn = mqtt.connect(`mqtt://${host}:${port}`, mqttOpts);
+    conn = mqtt.connect(`mqtt://${brokerHost}:${brokerPort}`, mqttOpts);
     // connInstance.on('reconnect', onConnectHandler);
     conn.on('connect', onConnectHandler.bind(null, conn));
     conn.on('error', err => onErrorHandler(err));
