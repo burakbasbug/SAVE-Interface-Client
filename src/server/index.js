@@ -10,6 +10,8 @@ const { getConnection } = require('../mqttClient');
 const routes = require('./routes');
 const elasticsearchService = require('./elasticsearchClient');
 
+const activeSchema = config.simulation.activeDataschema;
+
 const registerPlugins = async () => {
   await hapiConnection.register({
     plugin: require('@hapi/vision'),
@@ -32,7 +34,8 @@ module.exports.start = async () => {
     await elasticsearchService.createIndices();
     log.info('elasticsearch indices are ready');
     getConnection();
-    log.info('mqtt connection established');
+    log.info('mqtt connection is ready');
+    log.info(`please start ${activeSchema}`);
   } catch (err) {
     if (err.name === 'RequestError') {
       log.err(
