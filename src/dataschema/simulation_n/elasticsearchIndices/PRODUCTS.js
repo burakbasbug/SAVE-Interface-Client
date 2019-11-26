@@ -1,4 +1,4 @@
-const es = require('../commonTypes');
+const es = require('./commonTypes');
 
 const featureObj = {
   name: es.keywordNoIndex,

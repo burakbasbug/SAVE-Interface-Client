@@ -1,9 +1,9 @@
 const dotObject = require('dot-object');
-const product = require('./products');
-const replyTo = require('./replyto');
-const requests = require('./requests');
-const newStateInformation = require('./new_state_information');
-const performAction = require('./perform_action');
+const product = require('./PRODUCTS');
+const replyTo = require('./REPLYTO');
+const requests = require('./REQUESTS');
+const newStateInformation = require('./NEW_STATE_INFORMATION');
+const performAction = require('./PERFORM_ACTION');
 
 const PRODUCT = {
   properties: dotObject.object(dotObject.dot(product)),

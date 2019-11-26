@@ -1,4 +1,4 @@
-const es = require('../commonTypes');
+const es = require('./commonTypes');
 
 module.exports = {
   correlationid: es.keywordNoIndex,
