@@ -136,7 +136,7 @@
       async function waitUntilCycleDone() {
         let count = MAX_DURATION_OF_A_CYCLE_IN_SEC;
         while (count) {
-          await bluebird.delay(2000);
+          await bluebird.delay(1000);
           const { simulationCycleRunning, mqttConnected } = await getStatus();
           if (!mqttConnected) {
             return bluebird.reject(MQTT_FAILED_MSG);

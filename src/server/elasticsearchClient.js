@@ -43,17 +43,6 @@ async function deleteIndices() {
     .then(res => log.debug('deleteIndices', res));
 }
 
-// function checkConnection() {
-//   return rp(elasticsearch.url, {
-//     simple: false,
-//     resolveWithFullResponse: true,
-//   }).then(res => {
-//     if (res.statusCode !== 200) {
-//       throw new Error('No ES connection');
-//     }
-//   });
-// }
-
 function disableAutoIndexCreation() {
   const body = { persistent: { 'action.auto_create_index': 'false' } };
   return rp.put(`${elasticsearch.url}/_cluster/settings`, {

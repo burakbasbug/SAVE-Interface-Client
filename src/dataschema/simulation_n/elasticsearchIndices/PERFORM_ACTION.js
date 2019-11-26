@@ -15,7 +15,7 @@ module.exports = {
       machine_code: es.keyword,
     },
   },
-  // usecase_id: REMOVED
+  // usecase_id: This field will be REMOVED in the onMessage.js
   timestamp: es.date,
-  // type: REMOVED,
+  // type: This field will be REMOVED in the onMessage.js
 };

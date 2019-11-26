@@ -6,7 +6,7 @@
   "scripts": {
     "build:map": "node src/dataschema/simulation_n/generator.js",
     "build:app": "npm test && docker-compose build --parallel",
-    "start": "docker-compose up -d",
+    "start": "docker-compose up",
     "start:log": "docker-compose up -d && npm run _log",
     "stop": "docker-compose down",
     "restart": "npm stop && npm start",

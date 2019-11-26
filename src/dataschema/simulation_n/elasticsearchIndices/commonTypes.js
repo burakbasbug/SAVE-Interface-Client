@@ -1,8 +1,9 @@
 /* eslint-disable-file no-unused-vars */
 
 /**
- "enabled: false"
+"enabled: false"
   - store but dont index. Only used for OBJECTS
+
  "index : false"
   - store but dont index.
   - Only used for FIELDS, so you give a type as well

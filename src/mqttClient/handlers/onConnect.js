@@ -30,7 +30,6 @@ const subscribeCallbackTopic = () => {
 
 module.exports = mqttConnection => {
   conn = mqttConnection;
-  // promise'ler ile sirasi kesinlestirilecek.
   subscribeMetricTopics();
   subscribeCallbackTopic();
 };

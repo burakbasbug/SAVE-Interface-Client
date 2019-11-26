@@ -1,5 +1,4 @@
 const Boom = require('@hapi/boom');
-// const log = require('yalm');
 
 let simulationCycleRunning;
 

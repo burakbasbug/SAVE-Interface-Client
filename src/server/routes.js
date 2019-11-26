@@ -17,7 +17,7 @@ module.exports = [
     path: '/simulation/reset',
     handler: () => {
       simulatorService.setSimulationRunning(false);
-      return {};
+      return getStatus();
     },
   },
 ];

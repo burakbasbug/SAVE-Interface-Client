@@ -11,4 +11,3 @@ module.exports = {
   },
   timestamp: es.date,
 };
-// TOPIC: iki topic icin de ayni durum: 'parameter.type' disinda parameter fieldinin hicbir fieldi maplenmeyecek

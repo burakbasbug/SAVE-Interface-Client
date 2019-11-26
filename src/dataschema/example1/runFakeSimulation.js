@@ -6,7 +6,6 @@ const config = require('../../../config');
 log.setLevel(config.logLevel);
 const client = MQTT.connect('mqtt://localhost:8883');
 
-// When passing async functions as event listeners, make sure to have a try catch block
 const publish = async data => {
   try {
     await client.publish('example1', JSON.stringify(data));
@@ -40,5 +39,3 @@ const generateData = () => {
 setInterval(async () => {
   await publish(generateData());
 }, 300);
-// island: 65.795278, -22.884514
-// m.east 38.071867, 49.933342
